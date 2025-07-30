@@ -224,7 +224,9 @@
         flex-direction: column;
         padding: 1rem 0;
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        z-index: 999;
+        z-index: 10000;
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
     }
     
     .mobile-menu-toggle {
@@ -270,14 +272,6 @@
     
     .header-nav {
         display: none;
-        position: fixed;
-        top: 60px;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0,0,0,0.5);
-        z-index: 999;
-        animation: fadeIn 0.3s ease;
     }
     
     @keyframes fadeIn {
@@ -301,44 +295,37 @@
     }
     
     .header-nav.active {
-        display: block;
-    }
-    
-    .header-nav::before {
-        content: '';
-        position: absolute;
-        top: 0;
+        display: flex !important;
+        position: fixed;
+        top: 60px;
         left: 0;
         right: 0;
-        height: auto;
-        max-height: 80vh;
-        background-color: var(--bg-primary);
+        background: white;
+        flex-direction: column;
+        padding: 0;
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        border-radius: 0 0 16px 16px;
-        animation: slideDown 0.3s ease;
+        z-index: 10000;
+        max-height: calc(100vh - 60px);
+        overflow-y: auto;
+        border-bottom: 1px solid var(--border-color);
     }
+    
     
     .header-nav.active .nav-link,
     .header-nav.active .nav-dropdown {
-        display: block;
+        display: block !important;
         width: 100%;
         text-align: left;
         padding: 16px 24px;
         font-size: 16px;
-        background-color: transparent;
+        background-color: white;
         margin: 0;
         border-radius: 0;
         position: relative;
-        z-index: 1;
+        z-index: 10001;
         border-bottom: 1px solid var(--border-color);
-        animation: slideDown 0.3s ease;
-        animation-fill-mode: both;
+        color: var(--text-primary);
     }
-    
-    .header-nav.active .nav-link:nth-child(1) { animation-delay: 0.05s; }
-    .header-nav.active .nav-link:nth-child(2) { animation-delay: 0.1s; }
-    .header-nav.active .nav-link:nth-child(3) { animation-delay: 0.15s; }
-    .header-nav.active .nav-dropdown { animation-delay: 0.2s; }
     
     .nav-dropdown .dropdown-toggle {
         width: 100%;

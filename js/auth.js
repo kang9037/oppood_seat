@@ -6,7 +6,7 @@ function checkAuth() {
     const currentPage = window.location.pathname.split('/').pop();
     
     // 로그인이 필요없는 페이지들
-    const publicPages = ['index.html', 'login.html', 'register.html', 'admin-login.html', ''];
+    const publicPages = ['index.html', 'login.html', 'register.html', 'admin-login.html', 'about.html', ''];
     
     // 관리자 페이지
     const adminPages = ['admin.html'];
@@ -14,6 +14,8 @@ function checkAuth() {
     if (!currentUser && !publicPages.includes(currentPage)) {
         // 로그인하지 않은 상태에서 보호된 페이지 접근 시
         alert('로그인이 필요합니다.');
+        // 현재 페이지를 sessionStorage에 저장
+        sessionStorage.setItem('redirectUrl', window.location.href);
         window.location.href = 'login.html';
         return false;
     }
@@ -94,12 +96,19 @@ if (document.getElementById('loginForm')) {
                 alert('로그인 성공!');
             }
             
-            // 이전 페이지가 있으면 그곳으로, 없으면 홈으로
-            const referrer = document.referrer;
-            if (referrer && !referrer.includes('login.html') && !referrer.includes('register.html')) {
-                window.location.href = referrer;
+            // sessionStorage에 저장된 리디렉션 URL 확인
+            const redirectUrl = sessionStorage.getItem('redirectUrl');
+            if (redirectUrl) {
+                sessionStorage.removeItem('redirectUrl');
+                window.location.href = redirectUrl;
             } else {
-                window.location.href = 'index.html';
+                // 이전 페이지가 있으면 그곳으로, 없으면 about.html로
+                const referrer = document.referrer;
+                if (referrer && !referrer.includes('login.html') && !referrer.includes('register.html')) {
+                    window.location.href = referrer;
+                } else {
+                    window.location.href = 'about.html';
+                }
             }
         } else {
             alert('아이디 또는 비밀번호가 올바르지 않습니다.');
@@ -172,7 +181,7 @@ function logout() {
     localStorage.removeItem('currentUser');
     sessionStorage.removeItem('currentUser');
     alert('로그아웃되었습니다.');
-    window.location.href = 'login.html';
+    window.location.href = 'about.html';
 }
 
 // 현재 사용자 정보 가져오기

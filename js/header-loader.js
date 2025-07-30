@@ -33,17 +33,24 @@ document.addEventListener('DOMContentLoaded', async function() {
             // 로그인 상태 확인 및 UI 업데이트
             initializeNavigation();
             
+            // 모바일 메뉴 토글 초기화
+            const mobileToggle = document.querySelector('.mobile-menu-toggle');
+            if (mobileToggle) {
+                console.log('Mobile menu toggle found and initialized');
+            }
+            
         } catch (error) {
             console.error('헤더 로드 실패:', error);
             // 폴백: 기본 헤더 구조 표시
             headerPlaceholder.innerHTML = `
                 <header class="header">
                     <div class="container">
-                        <h1 class="header-title"><a href="index.html" style="text-decoration: none; color: inherit;">OPPOOD</a></h1>
+                        <h1 class="header-title"><a href="about.html" style="text-decoration: none; color: inherit;">OPPOOD</a></h1>
                         <nav class="header-nav">
                             <a href="about.html" class="nav-link">소개</a>
-                            <a href="meeting.html" class="nav-link">모임 신청</a>
                             <a href="oneday-class.html" class="nav-link">원데이클래스</a>
+                            <a href="meeting.html" class="nav-link">번개모임</a>
+                            <a href="community.html" class="nav-link">커뮤니티</a>
                         </nav>
                         <div class="header-auth">
                             <div class="auth-section" id="authSection">
@@ -51,6 +58,14 @@ document.addEventListener('DOMContentLoaded', async function() {
                                 <a href="register.html" class="btn btn-register">회원가입</a>
                             </div>
                         </div>
+                        <!-- 모바일 메뉴 토글 -->
+                        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="메뉴">
+                            <div class="menu-icon">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </button>
                     </div>
                 </header>
             `;
@@ -157,7 +172,7 @@ window.logout = function() {
     localStorage.removeItem('currentUser');
     sessionStorage.removeItem('currentUser');
     alert('로그아웃되었습니다.');
-    window.location.href = 'index.html';
+    window.location.href = 'about.html';
 };
 
 // 사용자 드롭다운 토글 함수
@@ -231,18 +246,31 @@ window.toggleAdminMenu = function(event) {
 
 // 모바일 메뉴 토글 함수
 window.toggleMobileMenu = function() {
+    console.log('toggleMobileMenu called');
     const nav = document.querySelector('.header-nav');
     const toggle = document.querySelector('.mobile-menu-toggle');
     const body = document.body;
     
+    console.log('nav element:', nav);
+    console.log('toggle element:', toggle);
+    
+    if (!nav) {
+        console.error('Navigation element not found');
+        return;
+    }
+    
     if (nav.classList.contains('active')) {
         nav.classList.remove('active');
-        toggle.classList.remove('active');
+        if (toggle) toggle.classList.remove('active');
+        body.classList.remove('menu-open');
         body.style.overflow = '';
+        console.log('Menu closed');
     } else {
         nav.classList.add('active');
-        toggle.classList.add('active');
+        if (toggle) toggle.classList.add('active');
+        body.classList.add('menu-open');
         body.style.overflow = 'hidden';
+        console.log('Menu opened');
     }
 };
 
@@ -250,12 +278,14 @@ window.toggleMobileMenu = function() {
 document.addEventListener('click', function(event) {
     const nav = document.querySelector('.header-nav');
     const toggle = document.querySelector('.mobile-menu-toggle');
+    const body = document.body;
     
     if (nav && nav.classList.contains('active')) {
         if (!event.target.closest('.header-nav') && !event.target.closest('.mobile-menu-toggle')) {
             nav.classList.remove('active');
             toggle.classList.remove('active');
-            document.body.style.overflow = '';
+            body.classList.remove('menu-open');
+            body.style.overflow = '';
         }
     }
 });

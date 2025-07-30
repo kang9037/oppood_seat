@@ -73,8 +73,34 @@ document.addEventListener('DOMContentLoaded', function() {
         selection: true,
         preserveObjectStacking: true,
         defaultCursor: 'default',
-        hoverCursor: 'pointer'
+        hoverCursor: 'pointer',
+        allowTouchScrolling: true,
+        enableRetinaScaling: true
     });
+    
+    // 모바일 터치 이벤트 지원
+    if ('ontouchstart' in window) {
+        canvas.allowTouchScrolling = true;
+        
+        // 모바일에서 캔버스 크기 조정
+        function resizeCanvas() {
+            const container = document.getElementById('canvasWrapper');
+            const isMobile = window.innerWidth <= 768;
+            
+            if (isMobile) {
+                const width = container.offsetWidth - 20;
+                const height = Math.min(600, window.innerHeight - 300);
+                canvas.setDimensions({
+                    width: width,
+                    height: height
+                });
+                canvas.renderAll();
+            }
+        }
+        
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+    }
     
     // Add keyboard event listener for backspace and ESC
     document.addEventListener('keydown', function(e) {

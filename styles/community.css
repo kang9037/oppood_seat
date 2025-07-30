@@ -998,33 +998,105 @@
     }
     
     .container {
-        padding: 0 1rem;
+        padding: 0;
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .community-wrapper {
+        width: 100%;
+        padding: 0;
+        margin-top: 1rem;
+        flex-direction: column;
+    }
+    
+    .side-menu {
+        position: static;
+        width: 100%;
+        margin-bottom: 1rem;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        background: #f5f5f5;
+    }
+    
+    .menu-nav {
+        background: transparent;
+        padding: 0.5rem 1rem;
+        border-radius: 0;
+    }
+    
+    .menu-list {
+        display: flex;
+        gap: 0.5rem;
+    }
+    
+    .menu-item {
+        flex: 1;
+    }
+    
+    .menu-item a {
+        padding: 0.5rem;
+        text-align: center;
+        font-size: 0.9rem;
+    }
+    
+    .menu-item .icon {
+        display: none;
+    }
+    
+    .main-content {
+        width: 100%;
+        padding: 0;
+        max-width: 100%;
+    }
+    
+    .content-section {
+        width: 100%;
+        padding: 0;
     }
     
     .feed-section {
         max-width: 100%;
+        width: 100%;
+        padding: 0;
     }
     
     .community-header {
         margin-bottom: 1.5rem;
         padding: 1.5rem 1rem;
-        margin: 0 -1rem 1.5rem;
+        margin: 0;
         border-radius: 0;
+        width: 100%;
     }
     
     .community-header h1 {
         font-size: 1.75rem;
     }
     
-    .feed-section {
-        padding: 0;
+    /* 게시글 작성 영역 전체 너비 */
+    .post-composer,
+    .login-prompt {
+        width: 100%;
+        margin: 0;
+        padding: 1rem;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        margin-bottom: 1rem;
     }
     
-    .post-composer,
+    /* 게시글 아이템 전체 너비 */
     .post-item {
+        width: 100%;
+        margin: 0;
+        margin-bottom: 0.5rem;
         padding: 1rem;
-        border-radius: 8px;
-        margin-bottom: 1rem;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
     
     .composer-header {
@@ -1088,15 +1160,53 @@
         width: 100%;
         padding: 0.75rem;
     }
+    
+    /* 혜택 정보 섹션도 전체 너비 */
+    .benefits-board {
+        width: 100%;
+        padding: 0;
+    }
+
+    .benefit-composer,
+    .benefit-item {
+        width: 100%;
+        margin: 0;
+        margin-bottom: 0.5rem;
+        padding: 1rem;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
 }
 
 @media (max-width: 480px) {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    
     .main {
-        padding-top: 0;
+        padding: 0;
+        width: 100%;
+        margin: 0;
     }
     
     .container {
         padding: 0;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+    }
+    
+    .community-wrapper,
+    .main-content,
+    .content-section,
+    .feed-section {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
     }
     
     .community-header h1 {
@@ -1105,17 +1215,38 @@
     
     .community-header {
         padding: 1.25rem 1rem;
+        width: 100%;
+        margin: 0;
     }
     
+    /* 전체 화면 너비로 확장 */
     .post-composer,
-    .post-item {
-        padding: 0.875rem;
+    .post-item,
+    .benefit-composer,
+    .benefit-item,
+    .login-prompt {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 1rem;
         border-radius: 0;
         border-left: none;
         border-right: none;
         box-shadow: none;
         border-top: 1px solid var(--border-color);
         border-bottom: 1px solid var(--border-color);
+    }
+    
+    .login-prompt {
+        padding: 1.5rem 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    /* feed-list 간격 제거 */
+    .feed-list {
+        gap: 0;
+        margin: 0;
+        padding: 0;
     }
     
     .post-item + .post-item {
@@ -1364,35 +1495,282 @@
     background: linear-gradient(135deg, rgba(0, 180, 166, 0.08) 0%, rgba(0, 212, 199, 0.08) 100%);
 }
 
-/* 반응형 디자인 */
-@media (max-width: 1024px) {
+/* 서피스프로 7 및 유사 태블릿 (800px - 1000px) */
+@media (min-width: 800px) and (max-width: 1000px) {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .main {
+        padding: 0;
+        margin: 0;
+    }
+    
+    .container {
+        padding: 0;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+    }
+    
     .community-wrapper {
         flex-direction: column;
-        margin-top: 1.5rem;
+        margin: 0;
+        padding: 0;
+        width: 100%;
     }
     
     .side-menu {
         width: 100%;
         position: static;
-        margin-bottom: 2rem;
+        margin: 0;
+        padding: 0;
+        background: #f5f5f5;
+        border-radius: 0;
+        box-shadow: none;
+        border: none;
+    }
+    
+    .menu-nav {
+        background: transparent;
+        padding: 1rem;
+    }
+    
+    .menu-list {
+        flex-direction: row;
+        gap: 1.5rem;
+        justify-content: center;
+    }
+    
+    .menu-item a {
+        padding: 0.75rem 2rem;
+        font-size: 1rem;
+    }
+    
+    .main-content,
+    .content-section,
+    .feed-section {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .community-header {
+        padding: 2.5rem 2rem;
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+    }
+    
+    /* 서피스프로 피드 전체 너비 */
+    .post-composer,
+    .post-item,
+    .login-prompt,
+    .benefit-composer,
+    .benefit-item {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 2rem;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        margin-bottom: 1px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    
+    .feed-list {
+        gap: 0;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .post-item + .post-item {
+        margin-top: 1px;
+    }
+}
+
+/* 서피스프로 및 태블릿 (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .container {
+        padding: 0;
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .community-wrapper {
+        flex-direction: column;
+        margin-top: 1rem;
+        padding: 0;
+        width: 100%;
+    }
+    
+    .side-menu {
+        width: 100%;
+        position: static;
+        margin-bottom: 1rem;
+        padding: 0;
+        background: #f5f5f5;
+        border-radius: 0;
+        box-shadow: none;
+        border: none;
+    }
+    
+    .menu-nav {
+        background: transparent;
+        padding: 0.75rem 1rem;
     }
     
     .menu-list {
         flex-direction: row;
         gap: 1rem;
+        justify-content: center;
     }
     
     .menu-item {
-        flex: 1;
+        flex: 0 1 auto;
     }
     
     .menu-item a {
         justify-content: center;
-        padding: 0.75rem;
+        padding: 0.75rem 1.5rem;
+    }
+    
+    .main-content {
+        width: 100%;
+        padding: 0;
+    }
+    
+    .content-section {
+        width: 100%;
+        padding: 0;
+    }
+    
+    .feed-section {
+        width: 100%;
+        padding: 0;
     }
     
     .community-header {
         padding: 2rem 1rem;
+        width: 100%;
+        margin: 0 0 1rem 0;
+        border-radius: 0;
+    }
+    
+    /* 서피스프로에서 피드 전체 너비 */
+    .post-composer,
+    .post-item,
+    .login-prompt,
+    .benefit-composer,
+    .benefit-item {
+        width: 100%;
+        margin: 0;
+        padding: 1.5rem;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        margin-bottom: 0.5rem;
+    }
+    
+    .feed-list {
+        gap: 0;
+    }
+}
+
+
+/* 중간 크기 모바일 (300px - 500px) */
+@media (min-width: 300px) and (max-width: 500px) {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .main {
+        padding: 0;
+        margin: 0;
+    }
+    
+    .container {
+        padding: 0;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+    }
+    
+    .community-wrapper {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        margin-top: 0.5rem;
+    }
+    
+    .side-menu {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        margin-bottom: 0.5rem;
+        background: #f5f5f5;
+        border-radius: 0;
+    }
+    
+    .menu-nav {
+        padding: 0.75rem 1rem;
+    }
+    
+    .menu-list {
+        justify-content: space-around;
+    }
+    
+    .menu-item a {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.875rem;
+    }
+    
+    .main-content,
+    .content-section,
+    .feed-section {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .community-header {
+        padding: 1.5rem 1rem;
+        margin: 0;
+        width: 100%;
+        border-radius: 0;
+    }
+    
+    .community-header h1 {
+        font-size: 1.4rem;
+    }
+    
+    /* 게시물 영역 전체 너비 */
+    .post-composer,
+    .post-item,
+    .login-prompt,
+    .benefit-composer,
+    .benefit-item {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 1rem;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        box-shadow: none;
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .feed-list {
+        gap: 0;
+    }
+    
+    .post-item + .post-item {
+        border-top: none;
     }
 }
 

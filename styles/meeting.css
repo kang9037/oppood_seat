@@ -184,6 +184,69 @@
     color: var(--danger-color);
 }
 
+/* 아이패드 미니 (768px - 834px) */
+@media (min-width: 768px) and (max-width: 834px) {
+    .container {
+        padding: 0 20px;
+    }
+    
+    .page-header {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 20px;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 32px;
+    }
+    
+    .page-header > div {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+    
+    .page-title {
+        font-size: 1.75rem;
+    }
+    
+    .page-description {
+        font-size: 15px;
+    }
+    
+    #createMeetingBtn {
+        flex: 0 0 auto;
+        width: auto;
+        margin-top: 0;
+        white-space: nowrap;
+    }
+    
+    .content-layout {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .meetings-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .meeting-card {
+        min-width: 0;
+    }
+    
+    .meeting-card-title {
+        font-size: 1.1rem;
+        padding-right: 80px;
+    }
+    
+    .events-section {
+        padding: 20px;
+    }
+    
+    .event-card {
+        padding: 20px;
+    }
+}
+
 /* 태블릿 반응형 */
 @media (max-width: 968px) {
     .content-layout {
@@ -214,17 +277,48 @@
     }
 }
 
-/* 모바일 반응형 */
-@media (max-width: 480px) {
+/* 중간 크기 화면 반응형 (태블릿 등) */
+@media (max-width: 600px) {
     .page-header {
         flex-direction: column;
         text-align: center;
-        gap: 20px;
+        gap: 16px;
+        align-items: stretch;
+    }
+    
+    .page-header > div {
+        width: 100%;
+    }
+    
+    .page-title {
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+    }
+    
+    .page-description {
+        font-size: 14px;
     }
     
     #createMeetingBtn {
         width: 100%;
         justify-content: center;
+        margin: 0;
+    }
+}
+
+/* 모바일 반응형 */
+@media (max-width: 480px) {
+    .page-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+        margin-bottom: 32px;
+    }
+    
+    #createMeetingBtn {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 20px;
     }
     
     .content-layout {

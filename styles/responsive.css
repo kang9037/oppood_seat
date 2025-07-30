@@ -43,6 +43,22 @@
     .hero {
         padding: 50px 30px;
     }
+    
+    /* 모바일 메뉴 오버레이 */
+    body.menu-open {
+        overflow: hidden;
+    }
+    
+    body.menu-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+    }
 }
 
 /* 큰 모바일 / 작은 태블릿 (576px - 767px) */
