@@ -1,0 +1,37 @@
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# MCP Logs
+mcp-logs/
+*.log
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+out/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Configuration files with sensitive data
+config.js
+
+# Database files
+*.sql.backup
+database/backup/

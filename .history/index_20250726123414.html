@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPPOOD 소개 - 부산 검증된 직장인 모임 플랫폼</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background-color: #f8f9fa;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        /* Header */
+        .header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #00B4A6;
+            text-decoration: none;
+        }
+        
+        .nav {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav a:hover,
+        .nav a.active {
+            color: #00B4A6;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: 1px solid #00B4A6;
+        }
+        
+        .btn-login {
+            color: #00B4A6;
+            background-color: white;
+        }
+        
+        .btn-login:hover {
+            background-color: #00B4A6;
+            color: white;
+        }
+        
+        .btn-register {
+            background-color: #00B4A6;
+            color: white;
+        }
+        
+        .btn-register:hover {
+            background-color: #00968A;
+        }
+        
+        /* About Hero */
+        .about-hero {
+            background: linear-gradient(135deg, #00B4A6 0%, #00968A 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .about-hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .about-hero p {
+            font-size: 20px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Mission Section */
+        .mission {
+            padding: 80px 20px;
+            background-color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .mission-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .mission-text h2 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .mission-text p {
+            font-size: 18px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .mission-highlight {
+            color: #00B4A6;
+            font-weight: 600;
+        }
+        
+        .mission-image {
+            background: linear-gradient(135deg, #00B4A6 0%, #00968A 100%);
+            border-radius: 20px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+            color: white;
+            opacity: 0.8;
+        }
+        
+        /* Values Section */
+        .values {
+            padding: 80px 20px;
+            background-color: #f8f9fa;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #333;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .value-card {
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+        
+        .value-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #00B4A6;
+            margin-bottom: 15px;
+        }
+        
+        .value-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .value-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        /* Process Section */
+        .process {
+            padding: 80px 20px;
+            background-color: white;
+        }
+        
+        .process-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .process-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .process-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .process-number {
+            width: 60px;
+            height: 60px;
+            background-color: #00B4A6;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            flex-shrink: 0;
+            z-index: 2;
+        }
+        
+        .process-content {
+            margin-left: 30px;
+            flex: 1;
+        }
+        
+        .process-content h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .process-content p {
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .process-line {
+            position: absolute;
+            left: 29px;
+            top: 60px;
+            width: 2px;
+            height: calc(100% + 30px);
+            background-color: #e0e0e0;
+            z-index: 1;
+        }
+        
+        .process-item:last-child .process-line {
+            display: none;
+        }
+        
+        /* Team Section */
+        .team {
+            padding: 80px 20px;
+            background-color: #f8f9fa;
+        }
+        
+        .team-intro {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px;
+        }
+        
+        .team-intro p {
+            font-size: 18px;
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .team-values {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .team-value {
+            text-align: center;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+        }
+        
+        .team-value-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        .team-value h4 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .team-value p {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, #00B4A6 0%, #00968A 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: white;
+            color: #00B4A6;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer h4 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .footer p {
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+            
+            .about-hero h1 {
+                font-size: 32px;
+            }
+            
+            .mission-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .mission-image {
+                height: 300px;
+            }
+            
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-values {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="header-title">OPPOOD</h1>
+            <nav class="header-nav">
+                <a href="about.html" class="nav-link active">소개</a>
+                <a href="meeting.html" class="nav-link">모임 신청</a>
+                <a href="oneday-class.html" class="nav-link">원데이클래스</a>
+                <a href="seating.html" class="nav-link admin-only" style="display: none;">좌석배치</a>
+            </nav>
+            <div class="header-auth">
+                <div class="auth-section" id="authSection">
+                    <a href="login.html" class="btn btn-login">로그인</a>
+                    <a href="register.html" class="btn btn-register">회원가입</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Hero -->
+    <section class="about-hero">
+        <h1>OPPOOD와 함께하는 새로운 만남</h1>
+        <p>부산 지역 직장인들을 위한 검증된 모임 플랫폼으로, 건전하고 의미 있는 인연을 만들어갑니다.</p>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission">
+        <div class="container">
+            <div class="mission-content">
+                <div class="mission-text">
+                    <h2>우리의 미션</h2>
+                    <p><span class="mission-highlight">OPPOOD</span>는 부산 지역 직장인들이 일과 삶의 균형을 찾고, 새로운 인연을 만날 수 있는 건전한 모임 문화를 만들어갑니다.</p>
+                    <p>직장 인증을 통한 신뢰할 수 있는 회원 시스템으로 안전하고 품격 있는 만남을 보장하며, 다양한 관심사와 취미를 공유하는 사람들이 모여 서로 성장할 수 있는 기회를 제공합니다.</p>
+                    <p>우리는 단순한 만남을 넘어, 부산 직장인들의 삶에 활력과 즐거움을 더하는 커뮤니티가 되고자 합니다.</p>
+                </div>
+                <div class="mission-image">
+                    🤝
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values">
+        <div class="container">
+            <h2 class="section-title">OPPOOD의 핵심 가치</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-number">01</div>
+                    <h3>신뢰와 안전</h3>
+                    <p>철저한 직장 인증과 실명 확인을 통해 신뢰할 수 있는 회원들만이 활동할 수 있는 안전한 플랫폼을 제공합니다.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-number">02</div>
+                    <h3>품격 있는 만남</h3>
+                    <p>매너 평가 시스템과 커뮤니티 가이드라인을 통해 서로를 존중하는 건전한 모임 문화를 만들어갑니다.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-number">03</div>
+                    <h3>다양성과 포용</h3>
+                    <p>다양한 직종, 연령, 관심사를 가진 직장인들이 편견 없이 만나고 교류할 수 있는 열린 공간을 지향합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process">
+        <div class="container">
+            <h2 class="section-title">OPPOOD 이용 과정</h2>
+            <div class="process-timeline">
+                <div class="process-item">
+                    <div class="process-number">1</div>
+                    <div class="process-content">
+                        <h3>회원가입 및 인증</h3>
+                        <p>간단한 회원가입 후 직장 인증을 완료하면 OPPOOD의 모든 서비스를 이용할 수 있습니다.</p>
+                    </div>
+                    <div class="process-line"></div>
+                </div>
+                <div class="process-item">
+                    <div class="process-number">2</div>
+                    <div class="process-content">
+                        <h3>관심 모임 탐색</h3>
+                        <p>원데이 클래스, 번개모임, 정기모임 등 다양한 형태의 모임 중 관심 있는 활동을 찾아보세요.</p>
+                    </div>
+                    <div class="process-line"></div>
+                </div>
+                <div class="process-item">
+                    <div class="process-number">3</div>
+                    <div class="process-content">
+                        <h3>모임 참여</h3>
+                        <p>마음에 드는 모임에 신청하고, 새로운 사람들과 즐거운 시간을 보내세요.</p>
+                    </div>
+                    <div class="process-line"></div>
+                </div>
+                <div class="process-item">
+                    <div class="process-number">4</div>
+                    <div class="process-content">
+                        <h3>네트워크 확장</h3>
+                        <p>지속적인 교류를 통해 부산 지역 직장인 네트워크를 넓혀나가세요.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team">
+        <div class="container">
+            <h2 class="section-title">OPPOOD 팀</h2>
+            <div class="team-intro">
+                <p>OPPOOD는 부산을 사랑하는 직장인들이 모여 만든 플랫폼입니다. 우리는 직접 경험한 직장인의 외로움과 네트워킹의 필요성을 바탕으로, 모두가 편하게 이용할 수 있는 모임 플랫폼을 만들고자 합니다.</p>
+            </div>
+            <div class="team-values">
+                <div class="team-value">
+                    <div class="team-value-icon">💡</div>
+                    <h4>혁신</h4>
+                    <p>더 나은 모임 문화를 위해 끊임없이 고민합니다</p>
+                </div>
+                <div class="team-value">
+                    <div class="team-value-icon">❤️</div>
+                    <h4>열정</h4>
+                    <p>부산 직장인들의 삶을 더 풍요롭게 만들고자 합니다</p>
+                </div>
+                <div class="team-value">
+                    <div class="team-value-icon">🌟</div>
+                    <h4>성장</h4>
+                    <p>회원들과 함께 성장하는 플랫폼을 지향합니다</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2>지금 OPPOOD와 함께하세요</h2>
+        <p>부산의 검증된 직장인들과 새로운 인연을 만들어보세요</p>
+        <a href="register.html" class="cta-button">회원가입 하기</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h4>OPPOOD</h4>
+            <p>부산 검증된 직장인 모임 플랫폼</p>
+            <div class="footer-links">
+                <a href="#">이용약관</a>
+                <a href="#">개인정보처리방침</a>
+                <a href="#">문의하기</a>
+            </div>
+            <p style="opacity: 0.6; font-size: 14px;">© 2024 OPPOOD. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="js/navigation.js"></script>
+</body>
+</html>

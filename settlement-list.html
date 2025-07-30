@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="OPPOOD 정산 목록 - 모임 정산을 쉽게 관리하고 확인하세요.">
+    <meta name="keywords" content="정산 관리, 모임 정산, 더치페이, OPPOOD">
+    <meta name="author" content="OPPOOD">
+    <meta name="theme-color" content="#00B4A6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="OPPOOD">
+    <title>정산 목록 - OPPOOD</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/settlement-list.css">
+    <link rel="stylesheet" href="styles/modal.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <h1>정산 목록</h1>
+                <button id="createNewBtn" class="btn btn-primary" onclick="location.href='settlement.html'">
+                    새 정산 만들기
+                </button>
+            </div>
+
+            <div class="list-container">
+                <table class="settlement-table">
+                    <thead>
+                        <tr>
+                            <th width="60">번호</th>
+                            <th>제목</th>
+                            <th width="120">총 금액</th>
+                            <th width="100">참여 인원</th>
+                            <th width="120">정산 진행률</th>
+                            <th width="120">생성일</th>
+                            <th width="100">관리</th>
+                        </tr>
+                    </thead>
+                    <tbody id="settlementTableBody">
+                        <!-- 정산 목록이 여기에 표시됩니다 -->
+                    </tbody>
+                </table>
+                
+                <div id="emptyState" class="empty-state" style="display: none;">
+                    <p>아직 생성된 정산이 없습니다.</p>
+                    <button class="btn btn-primary" onclick="location.href='settlement.html'">
+                        첫 정산 만들기
+                    </button>
+                </div>
+            </div>
+
+            <!-- 페이지네이션 (필요시 추가) -->
+            <div class="pagination" id="pagination">
+                <!-- 페이지 번호들이 여기에 표시됩니다 -->
+            </div>
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script src="js/header-loader.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/settlement-list.js"></script>
+    <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(registration => console.log('SW registered:', registration))
+          .catch(error => console.log('SW registration failed:', error));
+      });
+    }
+    </script>
+</body>
+</html>

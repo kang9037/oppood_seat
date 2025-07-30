@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지 - OPPOOD</title>
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/admin.css">
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="admin-container">
+            <!-- Sidebar -->
+            <aside class="admin-sidebar">
+                <nav class="admin-nav">
+                    <a href="#applications" class="admin-nav-link active" onclick="showSection('applications')">
+                        <span class="nav-icon">📋</span>
+                        <span>신청 관리</span>
+                    </a>
+                    <a href="#meetings" class="admin-nav-link" onclick="showSection('meetings')">
+                        <span class="nav-icon">🤝</span>
+                        <span>모임 관리</span>
+                    </a>
+                    <a href="#classes" class="admin-nav-link" onclick="showSection('classes')">
+                        <span class="nav-icon">📚</span>
+                        <span>클래스 관리</span>
+                    </a>
+                    <a href="#members" class="admin-nav-link" onclick="showSection('members')">
+                        <span class="nav-icon">👥</span>
+                        <span>회원 관리</span>
+                    </a>
+                    <a href="#stats" class="admin-nav-link" onclick="showSection('stats')">
+                        <span class="nav-icon">📊</span>
+                        <span>통계</span>
+                    </a>
+                    <a href="#community" class="admin-nav-link" onclick="showSection('community')">
+                        <span class="nav-icon">💬</span>
+                        <span>커뮤니티 관리</span>
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Content -->
+            <div class="admin-content">
+                <!-- 신청 관리 섹션 -->
+                <section id="applications" class="admin-section active">
+                    <h2 class="section-title">신청 관리</h2>
+                    
+                    <!-- 필터 -->
+                    <div class="filter-bar">
+                        <select class="filter-select" onchange="filterApplications(this.value)">
+                            <option value="all">전체 신청</option>
+                            <option value="meeting">모임 신청</option>
+                            <option value="class">클래스 신청</option>
+                        </select>
+                        <select class="filter-select" onchange="filterByStatus(this.value)">
+                            <option value="all">전체 상태</option>
+                            <option value="pending">대기중</option>
+                            <option value="approved">승인됨</option>
+                            <option value="rejected">거절됨</option>
+                        </select>
+                        <input type="date" class="filter-date" onchange="filterByDate(this.value)">
+                    </div>
+                    
+                    <!-- 신청 목록 테이블 -->
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>신청일시</th>
+                                    <th>신청자</th>
+                                    <th>유형</th>
+                                    <th>신청 내용</th>
+                                    <th>회사</th>
+                                    <th>상태</th>
+                                    <th>액션</th>
+                                </tr>
+                            </thead>
+                            <tbody id="applicationsTableBody">
+                                <tr>
+                                    <td>2025-02-10 14:30</td>
+                                    <td>
+                                        <div class="user-info">
+                                            <span class="user-name">김철수</span>
+                                            <span class="user-email">kim@company.com</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge badge-class">클래스</span></td>
+                                    <td>AI 도구 활용법</td>
+                                    <td>부산테크</td>
+                                    <td><span class="status-badge status-pending">대기중</span></td>
+                                    <td>
+                                        <button class="btn-action btn-approve" onclick="approveApplication(1)">승인</button>
+                                        <button class="btn-action btn-reject" onclick="rejectApplication(1)">거절</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2025-02-09 10:15</td>
+                                    <td>
+                                        <div class="user-info">
+                                            <span class="user-name">이영희</span>
+                                            <span class="user-email">lee@startup.com</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge badge-meeting">모임</span></td>
+                                    <td>주말 독서모임</td>
+                                    <td>스타트업A</td>
+                                    <td><span class="status-badge status-approved">승인됨</span></td>
+                                    <td>
+                                        <button class="btn-action btn-view" onclick="viewDetails(2)">상세보기</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 모임 관리 섹션 -->
+                <section id="meetings" class="admin-section">
+                    <h2 class="section-title">모임 관리</h2>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3>전체 모임</h3>
+                            <p class="stat-number">24</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>이번 달 모임</h3>
+                            <p class="stat-number">8</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>평균 참석률</h3>
+                            <p class="stat-number">85%</p>
+                        </div>
+                    </div>
+                    
+                    <div class="action-bar">
+                        <button class="btn btn-primary" onclick="createNewMeeting()">새 모임 등록</button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>모임명</th>
+                                    <th>일시</th>
+                                    <th>장소</th>
+                                    <th>참가자</th>
+                                    <th>상태</th>
+                                    <th>액션</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>주말 독서모임</td>
+                                    <td>2025-02-15 14:00</td>
+                                    <td>서면 스터디카페</td>
+                                    <td>12/15명</td>
+                                    <td><span class="status-badge status-active">모집중</span></td>
+                                    <td>
+                                        <button class="btn-action btn-edit" onclick="editMeeting(1)">수정</button>
+                                        <button class="btn-action btn-delete" onclick="deleteMeeting(1)">삭제</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 클래스 관리 섹션 -->
+                <section id="classes" class="admin-section">
+                    <h2 class="section-title">원데이클래스 관리</h2>
+                    
+                    <div class="action-bar">
+                        <button class="btn btn-primary" onclick="createNewClass()">새 클래스 등록</button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>클래스명</th>
+                                    <th>강사</th>
+                                    <th>일시</th>
+                                    <th>수강료</th>
+                                    <th>신청현황</th>
+                                    <th>상태</th>
+                                    <th>액션</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>AI 도구 활용법</td>
+                                    <td>김에이아이</td>
+                                    <td>2025-02-10 19:00</td>
+                                    <td>70,000원</td>
+                                    <td>6/8명</td>
+                                    <td><span class="status-badge status-active">모집중</span></td>
+                                    <td>
+                                        <button class="btn-action btn-edit" onclick="editClass(1)">수정</button>
+                                        <button class="btn-action btn-view" onclick="viewClassApplications(1)">신청자보기</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 회원 관리 섹션 -->
+                <section id="members" class="admin-section">
+                    <h2 class="section-title">회원 관리</h2>
+                    
+                    <div class="search-bar">
+                        <input type="text" class="search-input" placeholder="이름, 이메일, 회사명으로 검색">
+                        <button class="btn btn-search">검색</button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>가입일</th>
+                                    <th>이름</th>
+                                    <th>이메일</th>
+                                    <th>회사</th>
+                                    <th>직급</th>
+                                    <th>인증상태</th>
+                                    <th>액션</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2025-01-15</td>
+                                    <td>김철수</td>
+                                    <td>kim@company.com</td>
+                                    <td>부산테크</td>
+                                    <td>과장</td>
+                                    <td><span class="status-badge status-verified">인증완료</span></td>
+                                    <td>
+                                        <button class="btn-action btn-view" onclick="viewMemberDetail(1)">상세보기</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 통계 섹션 -->
+                <section id="stats" class="admin-section">
+                    <h2 class="section-title">통계</h2>
+                    
+                    <div class="stats-overview">
+                        <div class="stat-card large">
+                            <h3>전체 회원수</h3>
+                            <p class="stat-number">156</p>
+                            <span class="stat-change positive">+12% 이번달</span>
+                        </div>
+                        <div class="stat-card large">
+                            <h3>이번 달 모임</h3>
+                            <p class="stat-number">8</p>
+                            <span class="stat-change">총 96명 참가</span>
+                        </div>
+                        <div class="stat-card large">
+                            <h3>클래스 수익</h3>
+                            <p class="stat-number">2,450,000원</p>
+                            <span class="stat-change positive">+25% 전월대비</span>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <h3>월별 가입자 추이</h3>
+                        <canvas id="memberChart"></canvas>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <h3>인기 클래스 TOP 5</h3>
+                        <canvas id="classChart"></canvas>
+                    </div>
+                </section>
+
+                <!-- 커뮤니티 관리 섹션 -->
+                <section id="community" class="admin-section">
+                    <h2 class="section-title">커뮤니티 관리</h2>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3>전체 게시글</h3>
+                            <p class="stat-number" id="totalPosts">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>신고된 게시글</h3>
+                            <p class="stat-number" id="reportedPosts">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>오늘 작성된 글</h3>
+                            <p class="stat-number" id="todayPosts">0</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 필터 -->
+                    <div class="filter-bar">
+                        <select class="filter-select" onchange="filterCommunityPosts(this.value)">
+                            <option value="all">전체 게시글</option>
+                            <option value="reported">신고된 글만</option>
+                            <option value="anonymous">익명 글만</option>
+                        </select>
+                        <input type="text" class="search-input" placeholder="내용 검색" onkeyup="searchCommunityPosts(this.value)">
+                    </div>
+                    
+                    <!-- 게시글 목록 테이블 -->
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>작성일시</th>
+                                    <th>실제 작성자</th>
+                                    <th>표시 이름</th>
+                                    <th>내용</th>
+                                    <th>좋아요</th>
+                                    <th>댓글</th>
+                                    <th>신고</th>
+                                    <th>액션</th>
+                                </tr>
+                            </thead>
+                            <tbody id="communityTableBody">
+                                <!-- JavaScript로 동적 생성 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+    
+    <script src="js/auth.js"></script>
+    <script src="js/header-loader.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

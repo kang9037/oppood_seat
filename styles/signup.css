@@ -1,0 +1,345 @@
+/* 회원가입 페이지 스타일 */
+.signup-wrapper {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.signup-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 3rem;
+}
+
+.signup-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.signup-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 3rem;
+}
+
+/* 회원 유형 선택 */
+.member-type-section {
+    margin-bottom: 3rem;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.member-type-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.member-type-card {
+    display: block;
+    cursor: pointer;
+    position: relative;
+}
+
+.member-type-card input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+}
+
+.member-type-card .card-content {
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    background: #fafafa;
+}
+
+.member-type-card input[type="radio"]:checked + .card-content {
+    border-color: #00B4A6;
+    background: #f0fcfb;
+    box-shadow: 0 4px 12px rgba(0, 180, 166, 0.15);
+}
+
+.member-type-card .icon {
+    margin-bottom: 1rem;
+    color: #00B4A6;
+}
+
+.member-type-card h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.member-type-card p {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.feature-list li {
+    padding: 0.25rem 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.feature-list li::before {
+    content: "✓";
+    color: #00B4A6;
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+/* 폼 섹션 */
+.form-section {
+    margin-bottom: 2.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #00B4A6;
+}
+
+.input-with-button {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.input-with-button input {
+    flex: 1;
+}
+
+.btn-outline {
+    background: white;
+    color: #00B4A6;
+    border: 1px solid #00B4A6;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-outline:hover {
+    background: #00B4A6;
+    color: white;
+}
+
+/* 에러 및 성공 메시지 */
+.error-message,
+.success-message,
+.helper-text {
+    display: block;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.error-message {
+    color: #dc3545;
+}
+
+.success-message {
+    color: #28a745;
+}
+
+.helper-text {
+    color: #666;
+}
+
+/* 강사 섹션 */
+.instructor-section {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2.5rem;
+}
+
+.notice-box {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 6px;
+    padding: 1rem;
+    margin-top: 1.5rem;
+}
+
+.notice-box p {
+    margin: 0 0 0.5rem 0;
+    font-weight: 600;
+    color: #856404;
+}
+
+.notice-box ul {
+    margin: 0;
+    padding-left: 1.5rem;
+    color: #856404;
+}
+
+.notice-box li {
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+}
+
+/* 약관 동의 */
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+.checkbox-label span {
+    font-size: 0.95rem;
+    color: #333;
+}
+
+#agreeAll + span {
+    font-weight: 600;
+}
+
+.agreement-list {
+    border-top: 1px solid #e0e0e0;
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+.link-button {
+    background: none;
+    border: none;
+    color: #00B4A6;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 0.875rem;
+}
+
+.link-button:hover {
+    color: #008f7a;
+}
+
+/* 폼 액션 */
+.form-actions {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.btn-large {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.btn-primary {
+    background: #00B4A6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: #008f7a;
+}
+
+.btn-primary:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.login-link {
+    margin-top: 1.5rem;
+    color: #666;
+}
+
+.login-link a {
+    color: #00B4A6;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .signup-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .member-type-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .member-type-card .card-content {
+        padding: 1.5rem;
+    }
+    
+    .instructor-section {
+        padding: 1.5rem;
+    }
+    
+    .input-with-button {
+        flex-direction: column;
+    }
+    
+    .input-with-button input,
+    .input-with-button button {
+        width: 100%;
+    }
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="OPPOOD 로그인 - 부산 검증된 직장인 모임 플랫폼에 로그인하세요. 카카오, 네이버 간편 로그인 지원.">
+    <meta name="keywords" content="OPPOOD 로그인, 직장인 모임 로그인, 부산 모임 플랫폼">
+    <meta name="author" content="OPPOOD">
+    <meta name="theme-color" content="#00B4A6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="OPPOOD">
+    <title>로그인 - OPPOOD</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/auth.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="auth-header">
+                <h1 class="auth-title">OPPOOD</h1>
+                <p class="auth-subtitle">로그인</p>
+            </div>
+            
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="username">아이디</label>
+                    <input type="text" id="username" name="username" required 
+                           placeholder="아이디를 입력하세요">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">비밀번호</label>
+                    <input type="password" id="password" name="password" required 
+                           placeholder="비밀번호를 입력하세요">
+                </div>
+                
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="rememberMe">
+                        <span>로그인 상태 유지</span>
+                    </label>
+                    <a href="#" class="link">비밀번호 찾기</a>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-block">로그인</button>
+                
+                <div class="auth-divider">
+                    <span>또는</span>
+                </div>
+                
+                <button type="button" class="btn btn-social btn-kakao">
+                    <img src="https://cdn.jsdelivr.net/gh/Cloudinary-Account/korea@main/kakao-logo.png" alt="Kakao">
+                    카카오로 로그인
+                </button>
+                
+                <button type="button" class="btn btn-social btn-naver">
+                    <img src="https://cdn.jsdelivr.net/gh/Cloudinary-Account/korea@main/naver-logo.png" alt="Naver">
+                    네이버로 로그인
+                </button>
+            </form>
+            
+            <div class="auth-footer">
+                <p>아직 회원이 아니신가요? <a href="register.html" class="link">회원가입</a></p>
+                <p><a href="index.html" class="link">홈으로 돌아가기</a></p>
+            </div>
+            
+            <div class="admin-section">
+                <a href="admin-login.html" class="btn btn-admin">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"></path>
+                        <path d="M12 22V12"></path>
+                        <path d="M12 12H2"></path>
+                    </svg>
+                    관리자 페이지로 이동하기
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/auth.js"></script>
+    <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(registration => console.log('SW registered:', registration))
+          .catch(error => console.log('SW registration failed:', error));
+      });
+    }
+    </script>
+</body>
+</html>

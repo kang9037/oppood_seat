@@ -1,0 +1,447 @@
+/* About 페이지 스타일 - 모던하고 깔끔한 디자인 */
+.main {
+    min-height: calc(100vh - 70px);
+    padding: 40px 0 60px;
+    background-color: var(--bg-secondary);
+}
+
+/* index.html 페이지에서는 상단 여백을 줄임 */
+body:has(.hero) .main {
+    padding-top: 20px;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 100px 40px;
+    background: linear-gradient(135deg, #008A7F 0%, #00B4A6 50%, #00D4C7 100%);
+    color: white;
+    border-radius: var(--radius-lg);
+    margin-bottom: 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    transform: rotate(45deg);
+}
+
+.hero-title {
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 900;
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+    position: relative;
+    text-transform: uppercase;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hero-subtitle {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 400;
+    margin-bottom: 40px;
+    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.hero-values {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.value-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 500;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.value-icon {
+    font-size: 1.5em;
+    filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.2));
+}
+
+.hero-description {
+    font-size: clamp(1.375rem, 3vw, 2rem);
+    font-weight: 600;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Photo Gallery Section */
+.photo-gallery {
+    margin-bottom: 80px;
+    padding: 60px 0;
+    background-color: var(--bg-primary);
+    border-radius: var(--radius-lg);
+}
+
+.gallery-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin-top: 20px;
+}
+
+.gallery-container:first-of-type {
+    margin-top: 40px;
+}
+
+.gallery-track {
+    display: flex;
+    gap: 20px;
+    animation: scroll-left 10s linear infinite;
+}
+
+.gallery-reverse .gallery-track {
+    animation: scroll-right 10s linear infinite;
+}
+
+.gallery-image {
+    width: 400px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    flex-shrink: 0;
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes scroll-right {
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.gallery-container:hover .gallery-track {
+    animation-play-state: paused;
+}
+
+/* Features Section */
+.features {
+    margin-bottom: 80px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-top: 48px;
+}
+
+.feature-card {
+    background: var(--bg-primary);
+    padding: 40px 32px;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--primary-gradient);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: transparent;
+}
+
+.feature-card:hover::before {
+    transform: scaleX(1);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.feature-title {
+    color: var(--primary-dark);
+    margin-bottom: 16px;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.feature-description {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+/* Services Section */
+.services {
+    background-color: var(--bg-primary);
+    padding: 60px 40px;
+    border-radius: var(--radius-lg);
+    margin-bottom: 60px;
+    border: 1px solid var(--border-color);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 32px;
+    margin-top: 48px;
+}
+
+.service-card {
+    background: var(--bg-secondary);
+    padding: 32px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.service-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 1px var(--primary-color);
+}
+
+.service-title {
+    color: var(--primary-dark);
+    margin-bottom: 24px;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.service-list {
+    list-style: none;
+    padding: 0;
+}
+
+.service-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: var(--transition);
+}
+
+.service-list li:hover {
+    color: var(--text-primary);
+    padding-left: 8px;
+}
+
+.service-list li:last-child {
+    border-bottom: none;
+}
+
+.service-list li::before {
+    content: "✓";
+    color: var(--primary-dark);
+    font-weight: bold;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+/* Contact Section */
+.contact {
+    text-align: center;
+    padding: 60px 40px;
+    background: var(--bg-primary);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
+    opacity: 0.08;
+}
+
+.contact-description {
+    margin-bottom: 24px;
+    color: var(--text-secondary);
+    font-size: 1.125rem;
+    line-height: 1.6;
+}
+
+.contact-info {
+    color: var(--text-primary);
+    line-height: 2;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.contact-info a {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+/* 애니메이션 */
+.hero, .feature-card, .service-card, .contact {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.feature-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.feature-card:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+/* 태블릿 반응형 */
+@media (max-width: 768px) {
+    .main {
+        padding: 40px 0;
+    }
+    
+    .hero {
+        padding: 60px 30px;
+        margin-bottom: 40px;
+    }
+    
+    .hero-values {
+        gap: 20px;
+    }
+    
+    .value-item {
+        font-size: 1rem;
+    }
+    
+    .gallery-image {
+        width: 300px;
+        height: 225px;
+    }
+    
+    .features-grid,
+    .services-grid {
+        gap: 20px;
+    }
+    
+    .feature-card,
+    .service-card {
+        padding: 32px 24px;
+    }
+    
+    .services {
+        padding: 40px 24px;
+    }
+}
+
+/* 모바일 반응형 */
+@media (max-width: 480px) {
+    .main {
+        padding: 24px 0;
+    }
+    
+    .hero {
+        padding: 48px 24px;
+        margin-bottom: 32px;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.125rem;
+    }
+    
+    .hero-values {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .hero-description {
+        font-size: 1.375rem;
+    }
+    
+    .photo-gallery {
+        padding: 40px 0;
+    }
+    
+    .gallery-image {
+        width: 250px;
+        height: 188px;
+    }
+    
+    .features {
+        margin-bottom: 48px;
+    }
+    
+    .features-grid,
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .feature-card {
+        padding: 28px 20px;
+    }
+    
+    .feature-icon {
+        font-size: 2.5rem;
+    }
+    
+    .service-card {
+        padding: 24px 20px;
+    }
+    
+    .services {
+        padding: 32px 20px;
+        margin-bottom: 40px;
+    }
+    
+    .contact {
+        padding: 40px 24px;
+    }
+    
+    .section-title {
+        margin-bottom: 32px;
+    }
+}

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>좌석배치 시스템 - OPPOOD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/seating-new.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="seating-container">
+            <!-- Title and Status Bar -->
+            <div class="title-bar">
+                <h2 class="page-title">🪑 좌석배치 시스템</h2>
+                <div class="status-info">
+                    <span id="totalParticipants" class="status-item">참여자: 0명</span>
+                    <span id="totalSeats" class="status-item">총 좌석: 0석</span>
+                    <span id="emptySeats" class="status-item">빈 자리: 0석</span>
+                </div>
+            </div>
+
+            <!-- Main Layout -->
+            <div class="main-layout">
+                <!-- Control Panel -->
+                <div class="control-panel">
+                    <!-- Step 1: Group Creation -->
+                    <div class="step-card">
+                        <h3 class="step-title">1️⃣ 모둠 만들기</h3>
+                        <div class="step-content">
+                            <div class="input-row">
+                                <label>모둠당 인원</label>
+                                <select id="groupSize">
+                                    <option value="2">2명</option>
+                                    <option value="3">3명</option>
+                                    <option value="4" selected>4명</option>
+                                    <option value="5">5명</option>
+                                    <option value="6">6명</option>
+                                    <option value="8">8명</option>
+                                </select>
+                                <button id="createGroup" class="btn btn-primary">모둠 생성</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Participant Input -->
+                    <div class="step-card">
+                        <h3 class="step-title">2️⃣ 참여자 입력</h3>
+                        <div class="step-content">
+                            <div class="input-row">
+                                <label>참여자 수</label>
+                                <input type="number" id="participantCount" min="0" max="50" value="0">
+                                <button id="generateInputs" class="btn btn-outline">입력창 생성</button>
+                            </div>
+                            <div class="input-mode-toggle">
+                                <button id="individualMode" class="mode-btn active">개별 입력</button>
+                                <button id="bulkMode" class="mode-btn">일괄 입력</button>
+                            </div>
+                            <div id="individualInputArea">
+                                <div id="participantsInputs" class="participants-grid"></div>
+                            </div>
+                            <div id="bulkInputArea" style="display: none;">
+                                <div class="bulk-input-instructions">
+                                    <p>📌 한 줄에 한 명씩 입력하세요. 형식: <strong>이름,성별</strong></p>
+                                    <p>예시: 홍길동,남 또는 김영희,여</p>
+                                </div>
+                                <textarea id="bulkInputText" class="bulk-textarea" placeholder="홍길동,남&#10;김영희,여&#10;이철수,남&#10;박민지,여" rows="10"></textarea>
+                                <div class="bulk-actions">
+                                    <button id="parseBulkInput" class="btn btn-primary">일괄 적용</button>
+                                    <button id="generateSampleData" class="btn btn-outline">샘플 데이터</button>
+                                    <button id="clearBulkInput" class="btn btn-outline">초기화</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Arrangement Options -->
+                    <div class="options-row">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="genderRatio" checked>
+                            <span>남녀 비율 고려</span>
+                        </label>
+                        <select id="targetGroup" class="target-select">
+                            <option value="auto">전체 모둠 자동 배치</option>
+                        </select>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <button id="autoArrange" class="btn btn-success">
+                            <span class="btn-icon">▶</span> 자동 배치
+                        </button>
+                        <button id="rearrange" class="btn btn-warning">
+                            <span class="btn-icon">🔄</span> 재배치
+                        </button>
+                        <button id="clearCanvas" class="btn btn-danger">
+                            <span class="btn-icon">🗑️</span> 초기화
+                        </button>
+                    </div>
+
+                    <!-- Quick Stats -->
+                    <div class="quick-stats">
+                        <h4>빠른 통계</h4>
+                        <div id="genderStats" class="stats-row">
+                            <span class="stat-label">성별 분포:</span>
+                            <span id="maleCount">남 0명</span>
+                            <span id="femaleCount">여 0명</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Advanced Options -->
+                    <details class="advanced-section">
+                        <summary class="advanced-header">고급 설정</summary>
+                        <div class="advanced-content">
+                            <!-- Pairing Settings -->
+                            <div class="pairing-section">
+                                <h4>특정 인원 묶기</h4>
+                                <div class="pairing-input">
+                                    <input type="text" id="pairPeople" placeholder="김철수,이영희" class="pair-input">
+                                    <button id="addPair" class="btn btn-small">추가</button>
+                                </div>
+                                <div id="pairsList" class="pairs-list"></div>
+                            </div>
+
+                            <!-- History Section -->
+                            <div class="history-section">
+                                <h4>이전 배치 기록</h4>
+                                <div id="historyList" class="history-list"></div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <!-- Canvas Area -->
+                <div class="canvas-area">
+                    <div class="canvas-controls">
+                        <button id="zoomIn" class="canvas-control-btn" title="확대">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M9 4a1 1 0 0 1 1 1v3h3a1 1 0 1 1 0 2h-3v3a1 1 0 1 1-2 0v-3H5a1 1 0 1 1 0-2h3V5a1 1 0 0 1 1-1z"/>
+                                <path d="M8 15a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm0 2a9 9 0 1 1 0-18 9 9 0 0 1 0 18z"/>
+                            </svg>
+                        </button>
+                        <button id="zoomOut" class="canvas-control-btn" title="축소">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M5 9a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H5z"/>
+                                <path d="M8 15a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm0 2a9 9 0 1 1 0-18 9 9 0 0 1 0 18z"/>
+                            </svg>
+                        </button>
+                        <button id="zoomReset" class="canvas-control-btn" title="원래 크기">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908.418A6 6 0 1 1 8 2v1z"/>
+                                <path d="M8 4.466V.534a.5.5 0 0 1 .832-.374l2.567 2.567a.5.5 0 0 1 0 .708L8.832 5.002A.5.5 0 0 1 8 4.466z"/>
+                            </svg>
+                        </button>
+                        <span class="zoom-level" id="zoomLevel">100%</span>
+                        
+                        <div class="timer-controls">
+                            <div class="timer-separator"></div>
+                            <input type="number" id="timerMinutes" class="timer-input" min="1" max="60" value="5" title="분">
+                            <span class="timer-label">분</span>
+                            <button id="startTimer" class="canvas-control-btn timer-btn" title="타이머 시작">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M6.5 5.5L15 10l-8.5 4.5v-9z"/>
+                                </svg>
+                            </button>
+                            <button id="stopTimer" class="canvas-control-btn timer-btn" title="타이머 정지" style="display: none;">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                    <rect x="6" y="6" width="3" height="8" rx="0.5"/>
+                                    <rect x="11" y="6" width="3" height="8" rx="0.5"/>
+                                </svg>
+                            </button>
+                            <span class="timer-display" id="timerDisplay">00:00</span>
+                        </div>
+                        
+                        <button id="fullscreen" class="canvas-control-btn" title="전체 화면">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M3 4a1 1 0 0 1 1-1h3a1 1 0 0 1 0 2H5v2a1 1 0 0 1-2 0V4zm10 0a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v3a1 1 0 0 1-2 0V5h-2a1 1 0 0 1-1-1zM4 13a1 1 0 0 1 1 1v2h2a1 1 0 0 1 0 2H4a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1zm12 0a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-3a1 1 0 0 1 0-2h2v-2a1 1 0 0 1 1-1z"/>
+                            </svg>
+                        </button>
+                        
+                        <button id="toggleBigTimer" class="canvas-control-btn" title="타이머 크게 보기" style="display: none;">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm0 14a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm1-10h-1v5l3.5 2.1.5-.8-3-1.8V6z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="canvas-wrapper" id="canvasWrapper">
+                        <canvas id="seatingCanvas" width="800" height="600"></canvas>
+                    </div>
+                    
+                    <!-- Legend -->
+                    <div class="canvas-legend">
+                        <span class="legend-item">
+                            <span class="legend-color male"></span> 남성
+                        </span>
+                        <span class="legend-item">
+                            <span class="legend-color female"></span> 여성
+                        </span>
+                        <span class="legend-item">
+                            <span class="legend-color empty"></span> 빈자리
+                        </span>
+                    </div>
+                    
+                    <!-- Template Save Area -->
+                    <div class="template-section">
+                        <h4 class="template-title">📁 템플릿 관리</h4>
+                        <div class="template-controls">
+                            <div class="template-save-area">
+                                <input type="text" id="templateName" placeholder="템플릿 이름 입력" class="template-input">
+                                <button id="saveTemplate" class="btn btn-save-template">
+                                    <i class="icon">💾</i> 현재 배치 저장
+                                </button>
+                            </div>
+                            <div class="template-list" id="templateList">
+                                <!-- 저장된 템플릿들이 여기에 표시됩니다 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Groups Table -->
+            <div class="groups-table-section">
+                <h3 class="section-title">📋 모둠별 명단</h3>
+                <div id="groupsTable" class="groups-table-wrapper"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script src="js/header-loader.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/seating.js" charset="UTF-8"></script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+/* 페이지 헤더 */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #eee;
+}
+
+.page-header h1 {
+    margin: 0;
+    color: #333;
+    font-size: 2rem;
+}
+
+/* 목록 컨테이너 */
+.list-container {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+/* 테이블 스타일 */
+.settlement-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.settlement-table th,
+.settlement-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.settlement-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.settlement-table tbody tr {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.settlement-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.settlement-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* 테이블 셀 스타일 */
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.title-cell {
+    font-weight: 500;
+    color: #333;
+}
+
+.title-cell:hover {
+    color: #007bff;
+    text-decoration: underline;
+}
+
+.amount-cell {
+    font-weight: 500;
+    color: #28a745;
+}
+
+.progress-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 20px;
+    background-color: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #28a745;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    font-size: 0.875rem;
+    color: #6c757d;
+    min-width: 60px;
+    text-align: right;
+}
+
+/* 빈 상태 */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #6c757d;
+}
+
+.empty-state p {
+    margin: 0 0 1.5rem 0;
+    font-size: 1.1rem;
+}
+
+/* 버튼 스타일 */
+.btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.btn-info:hover {
+    background-color: #138496;
+}
+
+/* 액션 버튼 */
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+/* 페이지네이션 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+
+.pagination button {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #dee2e6;
+    background: white;
+    color: #333;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+    background-color: #f8f9fa;
+    border-color: #007bff;
+    color: #007bff;
+}
+
+.pagination button.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .list-container {
+        overflow-x: auto;
+    }
+    
+    .settlement-table {
+        min-width: 700px;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .progress-cell {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .progress-bar {
+        width: 100%;
+    }
+    
+    .progress-text {
+        text-align: left;
+    }
+}

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="OPPOOD 모임 신청 - 부산 직장인을 위한 다양한 모임을 확인하고 신청하세요. 네트워킹, 자기계발, 친목 모임이 준비되어 있습니다.">
+    <meta name="keywords" content="부산 직장인 모임, 모임 신청, 네트워킹, 자기계발, 친목 모임, OPPOOD">
+    <meta name="author" content="OPPOOD">
+    <meta name="theme-color" content="#00B4A6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="OPPOOD">
+    <title>모임 신청 - OPPOOD</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/calendar.css">
+    <link rel="stylesheet" href="styles/meeting.css">
+    <link rel="stylesheet" href="styles/modal.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="page-header">
+                <div>
+                    <h2 class="page-title">모임 신청</h2>
+                    <p class="page-description">날짜를 선택하여 모임을 확인하고 신청해보세요</p>
+                </div>
+                <button class="btn btn-primary" id="createMeetingBtn" style="display: none;" onclick="showCreateMeetingModal()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    모임 만들기
+                </button>
+            </div>
+
+            <div class="content-layout">
+                <!-- Calendar Section -->
+                <div class="calendar-section">
+                    <div id="calendar" class="calendar"></div>
+                </div>
+
+                <!-- Events Section -->
+                <div class="events-section">
+                    <h3 class="events-title">예정된 모임</h3>
+                    <div id="events-list" class="events-list">
+                        <p class="no-events">날짜를 선택해주세요</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 모임 카드 섹션 -->
+            <div class="meetings-cards-section">
+                <h3 class="section-title">전체 모임</h3>
+                
+                <!-- 카테고리 필터 -->
+                <div class="category-filter">
+                    <div class="filter-group">
+                        <button class="category-btn active" onclick="filterByStatus('all')">전체</button>
+                        <button class="category-btn" onclick="filterByStatus('recruiting')">모집중</button>
+                        <button class="category-btn" onclick="filterByStatus('upcoming')">모집예정</button>
+                        <button class="category-btn" onclick="filterByStatus('closed')">모집완료</button>
+                    </div>
+                    <div class="filter-divider"></div>
+                    <div class="filter-group">
+                        <button class="category-btn active" onclick="filterByCategory('all')">전체</button>
+                        <button class="category-btn" onclick="filterByCategory('self-improvement')">자기계발</button>
+                        <button class="category-btn" onclick="filterByCategory('social')">친목</button>
+                        <button class="category-btn" onclick="filterByCategory('other')">기타</button>
+                    </div>
+                </div>
+                
+                <div class="meetings-grid" id="meetingsGrid">
+                    <!-- 카드들이 동적으로 추가됩니다 -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Application Modal -->
+    <div id="modal" class="modal" style="display: none;">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <h3 id="modal-title" class="modal-title"></h3>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <p><strong>날짜:</strong> <span id="modal-date"></span></p>
+                    <p><strong>시간:</strong> <span id="modal-time"></span></p>
+                    <p><strong>장소:</strong> <span id="modal-location"></span></p>
+                    <p><strong>참가비:</strong> <span id="modal-price"></span></p>
+                    <p><strong>현재 참가자:</strong> <span id="modal-participants"></span></p>
+                </div>
+                <div class="modal-description">
+                    <h4>상세 설명</h4>
+                    <p id="modal-description"></p>
+                </div>
+                <div class="modal-payment">
+                    <h4>결제 정보</h4>
+                    <p>계좌번호: <span id="modal-account"></span></p>
+                    <p>오픈채팅: <a id="modal-chat" href="#" target="_blank">참가 문의하기</a></p>
+                </div>
+                <div class="modal-participants" id="participantsList" style="display: none;">
+                    <h4>참여자 목록</h4>
+                    <ul id="participants-list"></ul>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-info" onclick="toggleParticipantsList()">참여자 보기</button>
+                    <button class="btn btn-primary" onclick="applyForEvent()">신청하기</button>
+                    <button class="btn btn-secondary" onclick="closeModal()">취소</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 모임 생성 모달 -->
+    <div id="create-meeting-modal" style="display: none;">
+        <div class="modal-backdrop" onclick="closeCreateMeetingModal()">
+            <div class="modal-content modal-large" onclick="event.stopPropagation()">
+                <button class="modal-close" onclick="closeCreateMeetingModal()">&times;</button>
+                <div class="modal-header">
+                    <h3 class="modal-title">모임 만들기</h3>
+                </div>
+                <div class="modal-body">
+                    <form id="createMeetingForm">
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <label for="meetingTitle">모임명 *</label>
+                                <input type="text" id="meetingTitle" name="title" required placeholder="예: 2월 독서 모임">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="meetingCategory">카테고리 *</label>
+                                <select id="meetingCategory" name="category" required>
+                                    <option value="">선택하세요</option>
+                                    <option value="self-improvement">자기계발</option>
+                                    <option value="social">친목</option>
+                                    <option value="other">기타</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="meetingType">모임 유형 *</label>
+                                <select id="meetingType" name="type" required>
+                                    <option value="">선택하세요</option>
+                                    <option value="regular">정기 모임</option>
+                                    <option value="casual">번개 모임</option>
+                                    <option value="study">스터디</option>
+                                    <option value="networking">네트워킹</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="meetingDate">날짜 *</label>
+                                <input type="date" id="meetingDate" name="date" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="meetingTime">시간 *</label>
+                                <input type="time" id="meetingTime" name="time" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="meetingLocation">장소 *</label>
+                                <input type="text" id="meetingLocation" name="location" required placeholder="예: 서면 스타벅스">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="meetingMaxPeople">최대 인원 *</label>
+                                <input type="number" id="meetingMaxPeople" name="maxPeople" required min="2" max="50" value="10">
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="meetingDescription">모임 설명 *</label>
+                                <textarea id="meetingDescription" name="description" required rows="3" 
+                                          placeholder="어떤 모임인지 간단히 설명해주세요"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="modal-actions">
+                            <button type="submit" class="btn btn-primary">모임 만들기</button>
+                            <button type="button" class="btn btn-secondary" onclick="closeCreateMeetingModal()">취소</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 입금 확인 모달 -->
+    <div id="payment-confirm-modal" style="display: none;">
+        <div class="modal-backdrop" onclick="closePaymentModal()">
+            <div class="modal-content" onclick="event.stopPropagation()">
+                <button class="modal-close" onclick="closePaymentModal()">&times;</button>
+                <div class="modal-header">
+                    <h3 class="modal-title">입금 확인</h3>
+                </div>
+                <div class="modal-body">
+                    <p>입금이 완료되셨나요?</p>
+                    <p class="payment-info">계좌번호: <span id="payment-account"></span></p>
+                    <p class="payment-amount">금액: <span id="payment-amount"></span></p>
+                    
+                    <div class="form-group">
+                        <label for="depositorName">입금자명 *</label>
+                        <input type="text" id="depositorName" required placeholder="홍길동">
+                    </div>
+                    
+                    <div class="modal-actions">
+                        <button class="btn btn-primary" onclick="confirmPayment()">입금 완료</button>
+                        <button class="btn btn-secondary" onclick="closePaymentModal()">취소</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/header-loader.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/calendar.js"></script>
+    <script src="js/meeting.js"></script>
+    <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(registration => console.log('SW registered:', registration))
+          .catch(error => console.log('SW registration failed:', error));
+      });
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,255 @@
+/* 캘린더 스타일 - 모던하고 깔끔한 디자인 */
+.calendar {
+    background: var(--bg-primary);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding: 0 8px;
+}
+
+.calendar-nav {
+    background: var(--bg-tertiary);
+    border: none;
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    padding: 0;
+    transition: var(--transition);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar-nav:hover {
+    background-color: var(--bg-secondary);
+    color: var(--primary-color);
+}
+
+.calendar-nav:active {
+    transform: scale(0.95);
+}
+
+.calendar-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background-color: var(--border-color);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.calendar-weekday {
+    text-align: center;
+    font-weight: 600;
+    color: var(--text-secondary);
+    padding: 12px 8px;
+    font-size: 14px;
+    background-color: var(--bg-secondary);
+    letter-spacing: 0.02em;
+}
+
+.calendar-weekday:first-child {
+    color: var(--danger-color);
+}
+
+.calendar-weekday:last-child {
+    color: var(--primary-color);
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-primary);
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    min-height: 48px;
+    font-weight: 500;
+}
+
+.calendar-day:hover {
+    background-color: var(--bg-tertiary);
+    z-index: 1;
+}
+
+.calendar-day.selected {
+    background: var(--primary-gradient);
+    color: white;
+    font-weight: 600;
+    z-index: 2;
+}
+
+.calendar-day.selected:hover {
+    background: linear-gradient(135deg, #00D4C7 0%, #0BC5EA 100%);
+}
+
+.calendar-day.other-month {
+    color: var(--border-color);
+    background-color: var(--bg-secondary);
+}
+
+.calendar-day.today {
+    background-color: rgba(91, 79, 243, 0.08);
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.calendar-day.today::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+}
+
+.calendar-day-number {
+    font-size: 15px;
+    line-height: 1;
+}
+
+/* 이벤트 표시 점 */
+.calendar-events {
+    display: flex;
+    gap: 4px;
+    margin-top: 4px;
+    position: absolute;
+    bottom: 8px;
+}
+
+.event-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--warning-color);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.event-dot.meeting {
+    background: var(--primary-gradient);
+}
+
+.event-dot.class {
+    background-color: var(--success-color);
+}
+
+/* 로딩 상태 */
+.calendar.loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.calendar.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 32px;
+    height: 32px;
+    border: 3px solid var(--border-color);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+/* 태블릿 반응형 */
+@media (max-width: 768px) {
+    .calendar {
+        padding: 20px;
+    }
+    
+    .calendar-header {
+        margin-bottom: 20px;
+        padding: 0 4px;
+    }
+    
+    .calendar-nav {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+    
+    .calendar-title {
+        font-size: 1rem;
+    }
+    
+    .calendar-day {
+        min-height: 40px;
+    }
+    
+    .calendar-weekday {
+        padding: 10px 6px;
+        font-size: 13px;
+    }
+}
+
+/* 모바일 반응형 */
+@media (max-width: 480px) {
+    .calendar {
+        padding: 16px;
+    }
+    
+    .calendar-header {
+        margin-bottom: 16px;
+    }
+    
+    .calendar-grid {
+        gap: 0;
+    }
+    
+    .calendar-day {
+        min-height: 36px;
+    }
+    
+    .calendar-day-number {
+        font-size: 13px;
+    }
+    
+    .calendar-weekday {
+        padding: 8px 4px;
+        font-size: 12px;
+    }
+    
+    .event-dot {
+        width: 4px;
+        height: 4px;
+    }
+    
+    .calendar-events {
+        gap: 2px;
+        bottom: 4px;
+    }
+    
+    .calendar-day.today::after {
+        width: 3px;
+        height: 3px;
+        bottom: 2px;
+    }
+}

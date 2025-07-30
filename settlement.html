@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="OPPOOD 정산 관리 - 부산 직장인 모임의 정산 관리 시스템">
+    <meta name="theme-color" content="#00B4A6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>정산 관리 - OPPOOD</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/settlement.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="page-header">
+                <h1>정산 관리</h1>
+                <div class="header-buttons">
+                    <button id="viewListBtn" class="btn btn-secondary">
+                        목록
+                    </button>
+                    <button id="createSettlementBtn" class="btn btn-primary">
+                        정산 테이블 만들기
+                    </button>
+                </div>
+            </div>
+
+            <!-- 정산 목록 -->
+            <div id="settlementList" class="settlement-list">
+                <!-- 정산 카드들이 여기에 동적으로 추가됩니다 -->
+            </div>
+        </div>
+    </main>
+
+    <!-- 정산 생성 모달 -->
+    <div id="settlementModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>정산 테이블 만들기</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="settlementForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="settlementTitle">정산 제목</label>
+                            <input type="text" id="settlementTitle" class="form-input" required 
+                                   placeholder="예: 2024년 1월 모임 정산">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="totalAmount">전체 정산금액</label>
+                            <input type="number" id="totalAmount" class="form-input" required 
+                                   placeholder="총 금액을 입력하세요">
+                        </div>
+                        <div class="form-group">
+                            <label for="participantCount">참여 인원수</label>
+                            <input type="number" id="participantCount" class="form-input" required 
+                                   min="1" placeholder="참여 인원수">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="participantNames">참여자 명단</label>
+                        <textarea id="participantNames" class="form-textarea" rows="4" required
+                                  placeholder="참여자 이름을 쉼표로 구분하여 입력하세요&#10;예: 홍길동, 김철수, 이영희"></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="cancelBtn">취소</button>
+                        <button type="submit" class="btn btn-primary">정산 테이블 생성</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/header-loader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="js/settlement.js"></script>
+</body>
+</html>

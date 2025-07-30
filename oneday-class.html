@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="OPPOOD 원데이클래스 - 전문가와 함께하는 실무 스킬업 클래스. Excel, PPT, 데이터 분석, AI 도구 활용 등 다양한 클래스를 만나보세요.">
+    <meta name="keywords" content="원데이클래스, 직장인 교육, Excel 클래스, PPT 클래스, 데이터 분석, AI 도구, OPPOOD">
+    <meta name="author" content="OPPOOD">
+    <meta name="theme-color" content="#00B4A6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="OPPOOD">
+    <title>원데이클래스 - OPPOOD</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/calendar.css">
+    <link rel="stylesheet" href="styles/oneday-class.css">
+    <link rel="stylesheet" href="styles/modal.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="page-header">
+                <div>
+                    <h2 class="page-title">원데이클래스</h2>
+                    <p class="page-description">전문가와 함께하는 실무 스킬업 클래스</p>
+                </div>
+                <button class="btn btn-primary admin-only" id="addClassBtn" style="display: none;" onclick="showAddClassModal()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    클래스 등록
+                </button>
+            </div>
+
+            <div class="content-layout">
+                <!-- Calendar Section -->
+                <div class="calendar-section">
+                    <div id="calendar" class="calendar"></div>
+                </div>
+
+                <!-- Classes Section -->
+                <div class="classes-section">
+                    <h3 class="classes-title">예정된 클래스</h3>
+                    <div id="classes-list" class="classes-list">
+                        <p class="no-classes">날짜를 선택해주세요</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 원데이클래스 카드 섹션 -->
+            <div class="classes-cards-section">
+                <h3 class="section-title">인기 원데이클래스</h3>
+                
+                <!-- 카테고리 필터 -->
+                <div class="category-filter">
+                    <button class="category-btn active" onclick="filterByCategory('all')">전체</button>
+                    <button class="category-btn" onclick="filterByCategory('recruiting')">모집중</button>
+                    <button class="category-btn" onclick="filterByCategory('upcoming')">모집예정</button>
+                    <button class="category-btn" onclick="filterByCategory('closed')">모집마감</button>
+                </div>
+                
+                <div class="classes-grid" id="classesGrid">
+                    <div class="class-item-card" data-category="recruiting" data-date="2025-02-15" data-id="excel-basic" onclick="showClassDetail('excel-basic')">
+                        <div class="class-item-image">
+                            <img src="https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Excel 기초 마스터">
+                            <span class="class-badge">인기</span>
+                            <span class="status-badge recruiting">모집중</span>
+                        </div>
+                        <div class="class-item-content">
+                            <h4 class="class-item-title">Excel 기초 마스터</h4>
+                            <p class="class-item-description">실무에서 바로 활용 가능한 엑셀 기초부터 중급까지 한번에 마스터하는 클래스</p>
+                            <div class="class-item-info">
+                                <span class="class-item-price">50,000원</span>
+                                <span class="class-item-duration">2시간</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="class-item-card" data-category="recruiting" data-date="2025-02-20" data-id="ppt-design" onclick="showClassDetail('ppt-design')">
+                        <div class="class-item-image">
+                            <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=600" alt="PPT 디자인 실무">
+                            <span class="class-badge new">신규</span>
+                            <span class="status-badge recruiting">모집중</span>
+                        </div>
+                        <div class="class-item-content">
+                            <h4 class="class-item-title">PPT 디자인 실무</h4>
+                            <p class="class-item-description">보고서와 프레젠테이션을 위한 실무 PPT 디자인 스킬을 배우는 클래스</p>
+                            <div class="class-item-info">
+                                <span class="class-item-price">60,000원</span>
+                                <span class="class-item-duration">3시간</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="class-item-card" data-category="upcoming" data-date="2025-03-01" data-id="data-analysis" onclick="showClassDetail('data-analysis')">
+                        <div class="class-item-image">
+                            <img src="https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=600" alt="데이터 분석 입문">
+                            <span class="status-badge upcoming">모집예정</span>
+                        </div>
+                        <div class="class-item-content">
+                            <h4 class="class-item-title">데이터 분석 입문</h4>
+                            <p class="class-item-description">Python과 Excel을 활용한 실무 데이터 분석 기초를 배우는 입문 클래스</p>
+                            <div class="class-item-info">
+                                <span class="class-item-price">80,000원</span>
+                                <span class="class-item-duration">4시간</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="class-item-card" data-category="closed" data-date="2025-01-25" data-id="notion-workspace" onclick="showClassDetail('notion-workspace')">
+                        <div class="class-item-image">
+                            <img src="https://images.pexels.com/photos/3182759/pexels-photo-3182759.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Notion 업무 활용법">
+                            <span class="class-badge">마감임박</span>
+                            <span class="status-badge closed">모집마감</span>
+                        </div>
+                        <div class="class-item-content">
+                            <h4 class="class-item-title">Notion 업무 활용법</h4>
+                            <p class="class-item-description">개인과 팀의 생산성을 높이는 Notion 워크스페이스 구축 방법</p>
+                            <div class="class-item-info">
+                                <span class="class-item-price">45,000원</span>
+                                <span class="class-item-duration">2시간</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="class-item-card" data-category="recruiting" data-date="2025-02-10" data-id="ai-tools" onclick="showClassDetail('ai-tools')">
+                        <div class="class-item-image">
+                            <img src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=600" alt="AI 도구 활용법">
+                            <span class="class-badge new">신규</span>
+                            <span class="status-badge recruiting">모집중</span>
+                        </div>
+                        <div class="class-item-content">
+                            <h4 class="class-item-title">AI 도구 활용법</h4>
+                            <p class="class-item-description">ChatGPT, Claude 등 AI 도구를 업무에 효과적으로 활용하는 방법</p>
+                            <div class="class-item-info">
+                                <span class="class-item-price">70,000원</span>
+                                <span class="class-item-duration">3시간</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="class-item-card" data-category="upcoming" data-date="2025-03-05" data-id="project-management" onclick="showClassDetail('project-management')">
+                        <div class="class-item-image">
+                            <img src="https://images.pexels.com/photos/3184298/pexels-photo-3184298.jpeg?auto=compress&cs=tinysrgb&w=600" alt="프로젝트 관리 기초">
+                            <span class="status-badge upcoming">모집예정</span>
+                        </div>
+                        <div class="class-item-content">
+                            <h4 class="class-item-title">프로젝트 관리 기초</h4>
+                            <p class="class-item-description">효율적인 프로젝트 관리를 위한 도구와 방법론을 배우는 실무 클래스</p>
+                            <div class="class-item-info">
+                                <span class="class-item-price">65,000원</span>
+                                <span class="class-item-duration">3시간</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 추가 클래스들 (숨김 상태) -->
+                    <div class="class-item-card more-classes" style="display: none;" data-category="recruiting" data-date="2025-02-25" data-id="sql-basic" onclick="showClassDetail('sql-basic')">
+                        <div class="class-item-image">
+                            <img src="https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=600" alt="SQL 기초">
+                            <span class="status-badge recruiting">모집중</span>
+                        </div>
+                        <div class="class-item-content">
+                            <h4 class="class-item-title">SQL 기초 마스터</h4>
+                            <p class="class-item-description">데이터베이스 조회와 분석을 위한 SQL 기초 문법 마스터</p>
+                            <div class="class-item-info">
+                                <span class="class-item-price">55,000원</span>
+                                <span class="class-item-duration">3시간</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="class-item-card more-classes" style="display: none;" data-category="upcoming" data-date="2025-03-10" data-id="git-github" onclick="showClassDetail('git-github')">
+                        <div class="class-item-image">
+                            <img src="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Git & GitHub">
+                            <span class="status-badge upcoming">모집예정</span>
+                        </div>
+                        <div class="class-item-content">
+                            <h4 class="class-item-title">Git & GitHub 입문</h4>
+                            <p class="class-item-description">개발 협업을 위한 Git 버전관리와 GitHub 활용법</p>
+                            <div class="class-item-info">
+                                <span class="class-item-price">60,000원</span>
+                                <span class="class-item-duration">3시간</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="class-item-card more-classes" style="display: none;" data-category="closed" data-date="2025-01-20" data-id="figma-design" onclick="showClassDetail('figma-design')">
+                        <div class="class-item-image">
+                            <img src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Figma 디자인">
+                            <span class="status-badge closed">모집마감</span>
+                        </div>
+                        <div class="class-item-content">
+                            <h4 class="class-item-title">Figma UI/UX 디자인</h4>
+                            <p class="class-item-description">실무에서 바로 쓰는 Figma를 활용한 UI/UX 디자인</p>
+                            <div class="class-item-info">
+                                <span class="class-item-price">75,000원</span>
+                                <span class="class-item-duration">4시간</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="more-button-container">
+                    <button class="btn-more" onclick="toggleMoreClasses()">
+                        <span id="moreButtonText">더보기</span>
+                        <svg class="more-icon" id="moreIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 클래스 상세 모달 -->
+    <div id="class-detail-modal" class="modal" style="display: none;">
+        <div class="modal-backdrop" onclick="closeClassDetailModal()"></div>
+        <div class="modal-content modal-large">
+            <button class="modal-close" onclick="closeClassDetailModal()">&times;</button>
+            <div class="modal-header">
+                <h3 id="detail-modal-title" class="modal-title"></h3>
+            </div>
+            <div class="modal-body">
+                <div class="detail-grid">
+                    <div class="detail-image">
+                        <img id="detail-image" src="" alt="">
+                    </div>
+                    <div class="detail-info">
+                        <div class="detail-section">
+                            <h4>클래스 정보</h4>
+                            <p><strong>수강료:</strong> <span id="detail-price"></span></p>
+                            <p><strong>소요시간:</strong> <span id="detail-duration"></span></p>
+                            <p><strong>난이도:</strong> <span id="detail-level"></span></p>
+                            <p><strong>정원:</strong> <span id="detail-capacity"></span></p>
+                        </div>
+                        <div class="detail-section">
+                            <h4>강사 소개</h4>
+                            <p id="detail-instructor"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-description">
+                    <h4>클래스 소개</h4>
+                    <p id="detail-description"></p>
+                </div>
+                <div class="detail-curriculum">
+                    <h4>커리큘럼</h4>
+                    <ul id="detail-curriculum"></ul>
+                </div>
+                <div class="detail-target">
+                    <h4>이런 분들께 추천합니다</h4>
+                    <ul id="detail-target"></ul>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-primary" onclick="applyForDetailClass()">신청하기</button>
+                <button class="btn btn-secondary" onclick="closeClassDetailModal()">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 클래스 등록 모달 -->
+    <div id="add-class-modal" style="display: none;">
+        <div class="modal-backdrop" onclick="closeAddClassModal()">
+            <div class="modal-content modal-large" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeAddClassModal()">&times;</button>
+            <div class="modal-header">
+                <h3 class="modal-title">원데이클래스 등록</h3>
+            </div>
+            <div class="modal-body">
+                <form id="addClassForm" class="add-class-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="classTitle">클래스명 *</label>
+                            <input type="text" id="classTitle" name="title" required placeholder="예: Excel 기초 마스터">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="classCategory">카테고리 *</label>
+                            <select id="classCategory" name="category" required>
+                                <option value="">선택하세요</option>
+                                <option value="office">오피스 (Excel, PPT 등)</option>
+                                <option value="data">데이터 분석</option>
+                                <option value="programming">프로그래밍</option>
+                                <option value="design">디자인</option>
+                                <option value="ai">AI 도구</option>
+                                <option value="management">프로젝트 관리</option>
+                                <option value="marketing">마케팅</option>
+                                <option value="other">기타</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="classDate">날짜 *</label>
+                            <input type="date" id="classDate" name="date" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="classTime">시간 *</label>
+                            <input type="time" id="classTime" name="time" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="classDuration">소요시간 *</label>
+                            <select id="classDuration" name="duration" required>
+                                <option value="">선택하세요</option>
+                                <option value="1시간">1시간</option>
+                                <option value="2시간">2시간</option>
+                                <option value="3시간">3시간</option>
+                                <option value="4시간">4시간</option>
+                                <option value="5시간">5시간</option>
+                                <option value="6시간">6시간</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="classPrice">수강료 *</label>
+                            <input type="number" id="classPrice" name="price" required placeholder="50000" min="0" step="1000">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="classCapacity">정원 *</label>
+                            <input type="number" id="classCapacity" name="capacity" required placeholder="20" min="1" max="100">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="classLevel">난이도 *</label>
+                            <select id="classLevel" name="level" required>
+                                <option value="">선택하세요</option>
+                                <option value="초급">초급</option>
+                                <option value="중급">중급</option>
+                                <option value="고급">고급</option>
+                                <option value="전체">전체</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="classLocation">장소 *</label>
+                            <input type="text" id="classLocation" name="location" required placeholder="예: 부산 해운대구 센텀시티">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="classInstructor">강사명 *</label>
+                            <input type="text" id="classInstructor" name="instructor" required placeholder="예: 홍길동">
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="classImageUrl">이미지 URL</label>
+                            <input type="url" id="classImageUrl" name="imageUrl" placeholder="https://example.com/image.jpg">
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="classShortDesc">간단 설명 *</label>
+                            <input type="text" id="classShortDesc" name="shortDescription" required 
+                                   placeholder="클래스를 한 줄로 설명해주세요" maxlength="100">
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="classDescription">상세 설명 *</label>
+                            <textarea id="classDescription" name="description" required rows="4" 
+                                      placeholder="클래스에 대한 자세한 설명을 입력해주세요"></textarea>
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="classInstructorInfo">강사 소개 *</label>
+                            <textarea id="classInstructorInfo" name="instructorInfo" required rows="3" 
+                                      placeholder="강사의 경력과 전문성을 소개해주세요"></textarea>
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="classCurriculum">커리큘럼 *</label>
+                            <textarea id="classCurriculum" name="curriculum" required rows="4" 
+                                      placeholder="각 커리큘럼은 새 줄로 구분해주세요&#10;예:&#10;1. Excel 기초 인터페이스&#10;2. 데이터 입력과 서식&#10;3. 기본 함수 활용"></textarea>
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="classTarget">추천 대상 *</label>
+                            <textarea id="classTarget" name="target" required rows="3" 
+                                      placeholder="각 대상은 새 줄로 구분해주세요&#10;예:&#10;Excel을 처음 접하는 직장인&#10;업무 효율을 높이고 싶은 사무직 종사자"></textarea>
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="classMaterials">준비물</label>
+                            <input type="text" id="classMaterials" name="materials" 
+                                   placeholder="예: 개인 노트북 (Excel 설치 필수)">
+                        </div>
+                    </div>
+                    
+                    <div class="modal-actions">
+                        <button type="submit" class="btn btn-primary">등록하기</button>
+                        <button type="button" class="btn btn-secondary" onclick="closeAddClassModal()">취소</button>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Modal -->
+    <div id="modal" class="modal" style="display: none;">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <h3 id="modal-title" class="modal-title"></h3>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <p><strong>날짜:</strong> <span id="modal-date"></span></p>
+                    <p><strong>시간:</strong> <span id="modal-time"></span></p>
+                    <p><strong>장소:</strong> <span id="modal-location"></span></p>
+                    <p><strong>수강료:</strong> <span id="modal-price"></span></p>
+                    <p><strong>강사:</strong> <span id="modal-instructor"></span></p>
+                    <p><strong>현재 신청자:</strong> <span id="modal-participants"></span></p>
+                </div>
+                <div class="modal-description">
+                    <h4>클래스 소개</h4>
+                    <p id="modal-description"></p>
+                </div>
+                <div class="modal-materials">
+                    <h4>준비물</h4>
+                    <p id="modal-materials"></p>
+                </div>
+                <div class="modal-payment">
+                    <h4>결제 정보</h4>
+                    <p>계좌번호: <span id="modal-account"></span></p>
+                    <p>오픈채팅: <a id="modal-chat" href="#" target="_blank">참가 문의하기</a></p>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-primary" onclick="applyForClass()">신청하기</button>
+                    <button class="btn btn-secondary" onclick="closeModal()">취소</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/header-loader.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/calendar.js"></script>
+    <script src="js/oneday-class.js"></script>
+    <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(registration => console.log('SW registered:', registration))
+          .catch(error => console.log('SW registration failed:', error));
+      });
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="OPPOOD 회원가입 - 부산 검증된 직장인 모임 플랫폼에 가입하세요. 직장인 인증으로 신뢰할 수 있는 커뮤니티.">
+    <meta name="theme-color" content="#00B4A6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>회원가입 - OPPOOD</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/auth.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="auth-header">
+                <h1 class="auth-title">OPPOOD</h1>
+                <p class="auth-subtitle">회원가입</p>
+            </div>
+            
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <label for="name">이름</label>
+                    <input type="text" id="name" name="name" required 
+                           placeholder="실명을 입력하세요">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">이메일</label>
+                    <input type="email" id="email" name="email" required 
+                           placeholder="example@email.com">
+                    <span class="form-hint">회사 이메일을 사용하시면 인증이 빠릅니다</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">비밀번호</label>
+                    <input type="password" id="password" name="password" required 
+                           placeholder="8자 이상, 영문+숫자 조합">
+                    <span class="form-hint">최소 8자 이상, 영문과 숫자를 포함해주세요</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword">비밀번호 확인</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required 
+                           placeholder="비밀번호를 다시 입력하세요">
+                </div>
+                
+                <div class="form-group">
+                    <label for="company">회사명</label>
+                    <input type="text" id="company" name="company" required 
+                           placeholder="재직 중인 회사명">
+                </div>
+                
+                <div class="form-group">
+                    <label for="position">직급/직무</label>
+                    <input type="text" id="position" name="position" required 
+                           placeholder="예: 마케팅팀 대리">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">휴대폰 번호</label>
+                    <input type="tel" id="phone" name="phone" required 
+                           placeholder="010-0000-0000">
+                </div>
+                
+                <div class="form-group">
+                    <label>관심 분야 (복수 선택 가능)</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="interests" value="networking">
+                            <span>네트워킹</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="interests" value="study">
+                            <span>스터디</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="interests" value="hobby">
+                            <span>취미활동</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="interests" value="career">
+                            <span>커리어</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="agreeTerms" required>
+                        <span><a href="#" class="link">이용약관</a> 및 <a href="#" class="link">개인정보처리방침</a>에 동의합니다</span>
+                    </label>
+                </div>
+                
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="agreeMarketing">
+                        <span>이벤트 및 혜택 정보 수신에 동의합니다 (선택)</span>
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-block">회원가입</button>
+            </form>
+            
+            <div class="auth-footer">
+                <p>이미 회원이신가요? <a href="login.html" class="link">로그인</a></p>
+                <p><a href="index.html" class="link">홈으로 돌아가기</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/auth.js"></script>
+    <script>
+        // 서비스 워커 등록
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => console.log('ServiceWorker 등록 성공:', registration.scope))
+                    .catch(error => console.log('ServiceWorker 등록 실패:', error));
+            });
+        }
+    </script>
+</body>
+</html>

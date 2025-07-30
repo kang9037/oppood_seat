@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="OPPOOD 회원가입 - 부산 직장인을 위한 모임 플랫폼에 가입하세요.">
+    <meta name="keywords" content="회원가입, OPPOOD, 부산 직장인, 강사회원, 일반회원">
+    <meta name="author" content="OPPOOD">
+    <meta name="theme-color" content="#00B4A6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="OPPOOD">
+    <title>회원가입 - OPPOOD</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/signup.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="signup-wrapper">
+                <div class="signup-card">
+                    <h2 class="signup-title">회원가입</h2>
+                    <p class="signup-subtitle">OPPOOD와 함께 특별한 모임을 시작하세요</p>
+                    
+                    <form id="signupForm" class="signup-form">
+                        <!-- 회원 유형 선택 -->
+                        <div class="member-type-section">
+                            <h3 class="section-title">회원 유형 선택</h3>
+                            <div class="member-type-grid">
+                                <label class="member-type-card">
+                                    <input type="radio" name="memberType" value="general" checked>
+                                    <div class="card-content">
+                                        <div class="icon">
+                                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                                <circle cx="12" cy="7" r="4"></circle>
+                                            </svg>
+                                        </div>
+                                        <h4>일반회원</h4>
+                                        <p>모임 참여 및 커뮤니티 이용</p>
+                                        <ul class="feature-list">
+                                            <li>모임 참여 가능</li>
+                                            <li>커뮤니티 활동</li>
+                                            <li>모임 개설 가능</li>
+                                        </ul>
+                                    </div>
+                                </label>
+                                
+                                <label class="member-type-card">
+                                    <input type="radio" name="memberType" value="instructor">
+                                    <div class="card-content">
+                                        <div class="icon">
+                                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                                <circle cx="9" cy="7" r="4"></circle>
+                                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                            </svg>
+                                        </div>
+                                        <h4>강사회원</h4>
+                                        <p>클래스 개설 및 모든 기능 이용</p>
+                                        <ul class="feature-list">
+                                            <li>원데이 클래스 개설</li>
+                                            <li>모임 개설 가능</li>
+                                            <li>커뮤니티 활동</li>
+                                            <li>수익 창출 가능</li>
+                                        </ul>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- 기본 정보 입력 -->
+                        <div class="form-section">
+                            <h3 class="section-title">기본 정보</h3>
+                            
+                            <div class="form-group">
+                                <label for="userId">아이디 *</label>
+                                <div class="input-with-button">
+                                    <input type="text" id="userId" name="userId" required minlength="4" maxlength="20" placeholder="4~20자의 영문, 숫자">
+                                    <button type="button" class="btn btn-outline" onclick="checkIdDuplicate()">중복확인</button>
+                                </div>
+                                <span class="error-message" id="userIdError"></span>
+                                <span class="success-message" id="userIdSuccess"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="password">비밀번호 *</label>
+                                <input type="password" id="password" name="password" required minlength="8" placeholder="8자 이상의 영문, 숫자, 특수문자">
+                                <span class="error-message" id="passwordError"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="passwordConfirm">비밀번호 확인 *</label>
+                                <input type="password" id="passwordConfirm" name="passwordConfirm" required placeholder="비밀번호를 다시 입력해주세요">
+                                <span class="error-message" id="passwordConfirmError"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="name">이름 *</label>
+                                <input type="text" id="name" name="name" required placeholder="실명을 입력해주세요">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">이메일 *</label>
+                                <input type="email" id="email" name="email" required placeholder="example@email.com">
+                                <span class="error-message" id="emailError"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">휴대폰 번호 *</label>
+                                <input type="tel" id="phone" name="phone" required placeholder="010-0000-0000" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}">
+                                <span class="helper-text">하이픈(-)을 포함하여 입력해주세요</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 강사회원 추가 정보 -->
+                        <div class="form-section instructor-section" id="instructorSection" style="display: none;">
+                            <h3 class="section-title">강사 정보</h3>
+                            
+                            <div class="form-group">
+                                <label for="instructorName">강사명/활동명</label>
+                                <input type="text" id="instructorName" name="instructorName" placeholder="강사로 활동할 이름을 입력해주세요">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="expertise">전문 분야</label>
+                                <input type="text" id="expertise" name="expertise" placeholder="예: 요가, 베이킹, 프로그래밍">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="introduction">강사 소개</label>
+                                <textarea id="introduction" name="introduction" rows="4" placeholder="간단한 경력과 소개를 작성해주세요"></textarea>
+                            </div>
+                            
+                            <div class="notice-box">
+                                <p><strong>강사회원 안내사항</strong></p>
+                                <ul>
+                                    <li>클래스 개설은 관리자 승인 후 가능합니다.</li>
+                                    <li>허위 정보 기재 시 회원 자격이 박탈될 수 있습니다.</li>
+                                    <li>강사 프로필은 추후 수정 가능합니다.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- 약관 동의 -->
+                        <div class="form-section">
+                            <h3 class="section-title">약관 동의</h3>
+                            
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="agreeAll" onchange="toggleAllAgreements()">
+                                    <span>모두 동의합니다</span>
+                                </label>
+                            </div>
+                            
+                            <div class="agreement-list">
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="agreement" id="termsAgree" required>
+                                        <span>[필수] 이용약관 동의</span>
+                                    </label>
+                                    <button type="button" class="link-button" onclick="showTerms('terms')">보기</button>
+                                </div>
+                                
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="agreement" id="privacyAgree" required>
+                                        <span>[필수] 개인정보 수집 및 이용 동의</span>
+                                    </label>
+                                    <button type="button" class="link-button" onclick="showTerms('privacy')">보기</button>
+                                </div>
+                                
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="agreement" id="marketingAgree">
+                                        <span>[선택] 마케팅 정보 수신 동의</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 가입 버튼 -->
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary btn-large">회원가입</button>
+                            <p class="login-link">
+                                이미 계정이 있으신가요? <a href="login.html">로그인</a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script src="js/header-loader.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/signup.js"></script>
+    <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(registration => console.log('SW registered:', registration))
+          .catch(error => console.log('SW registration failed:', error));
+      });
+    }
+    </script>
+</body>
+</html>

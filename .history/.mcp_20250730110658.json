@@ -1,0 +1,82 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-playwright"
+      ]
+    },
+    "notion": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@suekou/mcp-notion-server"
+      ],
+      "env": {
+        "NOTION_API_TOKEN": "${NOTION_API_TOKEN:-{integrationToken}}"
+      }
+    },
+    "threads": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@effective-ai/mcp-threads-server"
+      ],
+      "env": {
+        "THREADS_ACCESS_TOKEN": "${THREADS_ACCESS_TOKEN}"
+      }
+    },
+    "mysql": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@benborla29/mcp-server-mysql"
+      ],
+      "env": {
+        "MYSQL_HOST": "3.34.128.155",
+        "MYSQL_PORT": "3306",
+        "MYSQL_USER": "ssamgong",
+        "MYSQL_PASSWORD": "${MYSQL_PASSWORD:-dmonster}",
+        "MYSQL_DATABASE": "ssamgong_db",
+        "ALLOW_INSERT_OPERATION": "true",
+        "ALLOW_UPDATE_OPERATION": "false",
+        "ALLOW_DELETE_OPERATION": "false"
+      }
+    },
+    "supabase": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@supabase/mcp-server-supabase@latest",
+        "--read-only",
+        "--project-ref=syhgibrayncezgljxdzs"
+      ],
+      "env": {
+        "SUPABASE_ACCESS_TOKEN": "sbp_4d5f5bc82544d55cca3f76f541957e4653d835f4"
+      }
+    },
+    "github": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
+      }
+    }
+  }
+}

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로필 수정 - OPPOOD</title>
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/auth.css">
+    <link rel="stylesheet" href="styles/profile.css">
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="profile-container">
+                <div class="profile-header">
+                    <h2 class="profile-title">프로필 수정</h2>
+                    <p class="profile-subtitle">회원 정보를 수정하실 수 있습니다</p>
+                </div>
+                
+                <form id="profileForm" class="profile-form">
+                    <div class="profile-section">
+                        <h3 class="section-title">기본 정보</h3>
+                        
+                        <div class="form-group">
+                            <label for="name">이름</label>
+                            <input type="text" id="name" name="name" value="홍길동" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">이메일</label>
+                            <input type="email" id="email" name="email" value="hong@company.com" readonly>
+                            <span class="form-hint">이메일은 변경할 수 없습니다</span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">휴대폰 번호</label>
+                            <input type="tel" id="phone" name="phone" value="010-1234-5678" required>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-section">
+                        <h3 class="section-title">회사 정보</h3>
+                        
+                        <div class="form-group">
+                            <label for="company">회사명</label>
+                            <input type="text" id="company" name="company" value="부산테크" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="position">직급/직무</label>
+                            <input type="text" id="position" name="position" value="개발팀 과장" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="career">경력</label>
+                            <select id="career" name="career">
+                                <option value="0-2">0-2년</option>
+                                <option value="3-5" selected>3-5년</option>
+                                <option value="6-10">6-10년</option>
+                                <option value="10+">10년 이상</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-section">
+                        <h3 class="section-title">관심 분야</h3>
+                        
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="interests" value="networking" checked>
+                                <span>네트워킹</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="interests" value="study" checked>
+                                <span>스터디</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="interests" value="hobby">
+                                <span>취미활동</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="interests" value="career">
+                                <span>커리어</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-section">
+                        <h3 class="section-title">비밀번호 변경</h3>
+                        
+                        <div class="form-group">
+                            <label for="currentPassword">현재 비밀번호</label>
+                            <input type="password" id="currentPassword" name="currentPassword" 
+                                   placeholder="변경하려면 입력하세요">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="newPassword">새 비밀번호</label>
+                            <input type="password" id="newPassword" name="newPassword" 
+                                   placeholder="8자 이상, 영문+숫자 조합">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirmNewPassword">새 비밀번호 확인</label>
+                            <input type="password" id="confirmNewPassword" name="confirmNewPassword" 
+                                   placeholder="새 비밀번호를 다시 입력하세요">
+                        </div>
+                    </div>
+                    
+                    <div class="profile-section">
+                        <h3 class="section-title">알림 설정</h3>
+                        
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="notifications" value="meeting" checked>
+                            <span>모임 알림 받기</span>
+                        </label>
+                        
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="notifications" value="class" checked>
+                            <span>원데이클래스 알림 받기</span>
+                        </label>
+                        
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="notifications" value="marketing">
+                            <span>이벤트 및 혜택 정보 받기</span>
+                        </label>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">저장하기</button>
+                        <button type="button" class="btn btn-secondary" onclick="history.back()">취소</button>
+                    </div>
+                </form>
+                
+                <div class="profile-danger-zone">
+                    <h3 class="section-title">계정 관리</h3>
+                    <p>회원 탈퇴를 원하시면 아래 버튼을 클릭하세요.</p>
+                    <button class="btn btn-danger" onclick="confirmDeleteAccount()">회원 탈퇴</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script src="js/auth.js"></script>
+    <script src="js/header-loader.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테스트 페이지</title>
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #00B4A6;
+            margin-bottom: 20px;
+        }
+        .button {
+            background-color: #00B4A6;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .button:hover {
+            background-color: #00968A;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-box">
+        <h1>OPPOOD 테스트 페이지</h1>
+        <p>이 페이지가 정상적으로 보이면 HTML은 작동합니다.</p>
+        <button class="button" onclick="alert('버튼이 작동합니다!')">테스트 버튼</button>
+        
+        <h2>파일 체크:</h2>
+        <ul>
+            <li>현재 위치: <span id="location"></span></li>
+            <li>CSS 파일 존재: <span id="css-check"></span></li>
+            <li>JS 파일 존재: <span id="js-check"></span></li>
+        </ul>
+    </div>
+    
+    <script>
+        document.getElementById('location').textContent = window.location.pathname;
+        
+        // CSS 파일 체크
+        fetch('styles/common.css')
+            .then(response => {
+                document.getElementById('css-check').textContent = response.ok ? '✓ 존재함' : '✗ 없음';
+            })
+            .catch(() => {
+                document.getElementById('css-check').textContent = '✗ 접근 불가';
+            });
+            
+        // JS 파일 체크
+        fetch('scripts/common.js')
+            .then(response => {
+                document.getElementById('js-check').textContent = response.ok ? '✓ 존재함' : '✗ 없음';
+            })
+            .catch(() => {
+                document.getElementById('js-check').textContent = '✗ 접근 불가';
+            });
+    </script>
+</body>
+</html>

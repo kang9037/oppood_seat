@@ -1,0 +1,237 @@
+/* 반응형 디자인 최적화 */
+
+/* 대형 데스크톱 (1400px 이상) */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+}
+
+/* 일반 데스크톱 (1200px - 1399px) */
+@media (min-width: 1200px) and (max-width: 1399px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+/* 작은 데스크톱 / 태블릿 가로 (992px - 1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .container {
+        max-width: 960px;
+    }
+    
+    .content-layout {
+        gap: 30px;
+    }
+}
+
+/* 태블릿 (768px - 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .container {
+        max-width: 720px;
+    }
+    
+    .content-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .features-grid,
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .hero {
+        padding: 50px 30px;
+    }
+}
+
+/* 큰 모바일 / 작은 태블릿 (576px - 767px) */
+@media (min-width: 576px) and (max-width: 767px) {
+    .container {
+        max-width: 540px;
+        padding: 0 20px;
+    }
+    
+    .content-layout {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .features-grid,
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .hero {
+        padding: 40px 25px;
+    }
+    
+    .modal-content {
+        width: 90%;
+        padding: 25px;
+    }
+}
+
+/* 모바일 (576px 미만) */
+@media (max-width: 575px) {
+    .container {
+        width: 100%;
+        padding: 0 16px;
+    }
+    
+    /* Safe Area 대응 */
+    @supports (padding: max(0px)) {
+        .container {
+            padding-left: max(16px, env(safe-area-inset-left));
+            padding-right: max(16px, env(safe-area-inset-right));
+        }
+    }
+    
+    /* 헤더 스타일은 header.css에서 처리 */
+    
+    /* 히어로 섹션 */
+    .hero {
+        padding: 30px 20px;
+        margin-bottom: 30px;
+    }
+    
+    /* 그리드 조정 */
+    .features-grid,
+    .services-grid,
+    .content-layout {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    /* 카드 조정 */
+    .feature-card,
+    .service-card,
+    .event-card,
+    .class-card {
+        padding: 15px;
+    }
+    
+    /* 캘린더 조정 */
+    .calendar {
+        padding: 10px;
+    }
+    
+    .calendar-grid {
+        gap: 1px;
+    }
+    
+    .calendar-day {
+        min-height: 28px;
+        font-size: 0.8rem;
+    }
+    
+    /* 모달 스타일은 modal.css에서 처리 */
+    
+    /* 버튼 조정 */
+    .btn {
+        padding: 14px 24px;
+        font-size: 15px;
+        min-height: 48px;
+        touch-action: manipulation;
+    }
+    
+    .btn-block {
+        width: 100%;
+    }
+    
+    /* 섹션 간격 조정 */
+    section {
+        margin: 25px 0;
+    }
+    
+    .section-title {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+    }
+}
+
+/* 매우 작은 모바일 (375px 미만) */
+@media (max-width: 374px) {
+    .container {
+        padding: 0 12px;
+    }
+    
+    @supports (padding: max(0px)) {
+        .container {
+            padding-left: max(12px, env(safe-area-inset-left));
+            padding-right: max(12px, env(safe-area-inset-right));
+        }
+    }
+    
+    .hero-title {
+        font-size: 1.3rem;
+    }
+    
+    .hero-description {
+        font-size: 0.9rem;
+    }
+    
+    .feature-card,
+    .service-card {
+        padding: 12px;
+    }
+    
+    .calendar-day {
+        min-height: 25px;
+        font-size: 0.75rem;
+    }
+    
+    .event-dot {
+        width: 3px;
+        height: 3px;
+    }
+}
+
+/* 가로 모드 최적화 */
+@media (orientation: landscape) and (max-height: 600px) {
+    .header {
+        position: fixed;
+        z-index: 1000;
+    }
+    
+    body {
+        padding-top: 60px;
+    }
+    
+    .hero {
+        padding: 20px;
+    }
+    
+    .modal-content {
+        max-height: 85vh;
+        padding: 20px;
+    }
+}
+
+/* 프린트 스타일 */
+@media print {
+    .header-nav,
+    .modal,
+    .btn,
+    .calendar-nav {
+        display: none !important;
+    }
+    
+    body {
+        background: white;
+        color: black;
+    }
+    
+    .container {
+        max-width: 100%;
+    }
+    
+    .card,
+    .event-card,
+    .class-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}

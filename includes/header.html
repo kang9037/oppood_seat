@@ -1,0 +1,38 @@
+<!-- Header -->
+<header class="header">
+    <div class="container">
+        <h1 class="header-title"><a href="index.html" style="text-decoration: none; color: inherit;">OPPOOD</a></h1>
+        <nav class="header-nav">
+            <a href="about.html" class="nav-link">소개</a>
+            <a href="meeting.html" class="nav-link">모임 신청</a>
+            <a href="oneday-class.html" class="nav-link">원데이클래스</a>
+            <a href="community.html" class="nav-link">커뮤니티</a>
+            <div class="nav-dropdown admin-only" style="display: none;">
+                <button class="nav-link dropdown-toggle" onclick="toggleAdminMenu(event)">
+                    관리자용
+                    <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12">
+                        <path d="M3 5L6 8L9 5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                    </svg>
+                </button>
+                <div class="nav-dropdown-menu" id="adminDropdownMenu">
+                    <a href="seating.html" class="dropdown-item">좌석배치</a>
+                    <a href="settlement.html" class="dropdown-item">정산</a>
+                </div>
+            </div>
+        </nav>
+        <div class="header-auth">
+            <div class="auth-section" id="authSection">
+                <a href="login.html" class="btn btn-login">로그인</a>
+                <a href="register.html" class="btn btn-register">회원가입</a>
+            </div>
+        </div>
+        <!-- 모바일 메뉴 토글 -->
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="메뉴">
+            <div class="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
+    </div>
+</header>
